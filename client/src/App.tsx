@@ -67,9 +67,7 @@ function Router() {
         <Route path="/dashboard">
           {() => <ProtectedRoute component={Dashboard} />}
         </Route>
-        <Route path="/news">
-          {() => <ProtectedRoute component={News} />}
-        </Route>
+        <Route path="/news" component={News} />
         <Route path="/recommendations" component={Recommendations} />
         <Route path="/reinvest">
           {() => <ProtectedRoute component={Reinvest} />}
