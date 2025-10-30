@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Send, Bot, User, Sparkles, ArrowLeft, Newspaper } from "lucide-react";
 import { Link } from "wouter";
-import { useAuth } from "@/contexts/auth-context";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import africaMapImage from "@assets/africa_map.png";
@@ -30,7 +29,6 @@ export default function AIChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   const scrollToBottom = () => {
@@ -118,26 +116,11 @@ export default function AIChat() {
                 News
               </Button>
             </Link>
-            {isAuthenticated && user ? (
-              <Link href="/dashboard">
-                <Button size="sm" data-testid="button-dashboard">
-                  Dashboard
-                </Button>
-              </Link>
-            ) : (
-              <>
-                <Link href="/login">
-                  <Button variant="ghost" size="sm" data-testid="button-login">
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/register">
-                  <Button size="sm" data-testid="button-register">
-                    Register
-                  </Button>
-                </Link>
-              </>
-            )}
+            <Link href="/dashboard">
+              <Button size="sm" data-testid="button-dashboard">
+                Dashboard
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
