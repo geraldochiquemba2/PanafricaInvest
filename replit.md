@@ -47,6 +47,14 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 - `AssetTable` - Tabela de ativos com ordenação
 
 ### API Endpoints
+
+#### Autenticação
+- `POST /api/register` - Registra novo usuário com $500
+- `POST /api/login` - Autentica usuário
+- `POST /api/logout` - Encerra sessão
+- `GET /api/user` - Retorna dados do usuário logado
+
+#### IA & Investimentos
 - `POST /api/recommendations` - Gera recomendações usando Groq
 - `POST /api/reinvestment-suggestion` - Sugere próximo investimento
 
@@ -68,10 +76,12 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 ## Fluxo de Usuário
 
 1. **Chegada** → Landing page com informações
-2. **Questionário** → Completa perfil de investidor
-3. **Recomendações** → IA (Groq) gera sugestões personalizadas
-4. **Dashboard** → Visualiza portfólio e desempenho
-5. **Reinvestimento** → Recebe alertas quando targets são atingidos
+2. **Registro** → Criar conta com $500 de saldo inicial
+3. **Login** → Entrar na plataforma
+4. **Questionário** → Completa perfil de investidor
+5. **Recomendações** → IA (Groq) gera sugestões personalizadas
+6. **Dashboard** → Visualiza portfólio e desempenho
+7. **Reinvestimento** → Recebe alertas quando targets são atingidos
 
 ## Funcionalidades Implementadas
 
@@ -81,6 +91,17 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 - Animações CSS suaves (fadeIn, slideIn, pulse)
 - Componentes Shadcn responsivos
 - Botões de voltar em todas as páginas
+- Imagens de fundo realistas nas páginas principais
+
+### ✅ Autenticação & Usuários
+- Sistema completo de registro e login
+- Validação de formulários com Zod
+- Sessões seguras com express-session
+- Senhas hash com bcryptjs
+- Saldo inicial de $500 para novas contas
+- Display de saldo e username em todas as páginas
+- Logout funcional com confirmação
+- Rotas protegidas (Dashboard, Recommendations, Reinvest)
 
 ### ✅ IA & Recomendações
 - Integração com Groq API (llama-3.3-70b-versatile)
@@ -98,7 +119,7 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 - Integração real com @hashgraph/sdk
 - Smart Contracts EVM para automação
 - Conexão com APIs de bolsas africanas
-- Armazenamento de perfis em PostgreSQL
+- Migração de MemStorage para PostgreSQL persistente
 - Sistema KYC/AML
 
 ## Variáveis de Ambiente
