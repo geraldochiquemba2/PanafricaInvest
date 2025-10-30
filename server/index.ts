@@ -97,5 +97,34 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    
+    // Keep-Alive interno para prevenir hibernação no Render.com
+    if (process.env.NODE_ENV === "production") {
+      const PING_INTERVAL = 10 * 60 * 1000; // 10 minutos
+      
+      setInterval(() => {
+        const http = require('http');
+        const options = {
+          hostname: 'localhost',
+          port: port,
+          path: '/health',
+          method: 'GET',
+        };
+        
+        const req = http.request(options, (res: any) => {
+          if (res.statusCode === 200) {
+            log(`✅ Keep-alive ping successful`);
+          }
+        });
+        
+        req.on('error', (err: any) => {
+          log(`⚠️ Keep-alive ping error: ${err.message}`);
+        });
+        
+        req.end();
+      }, PING_INTERVAL);
+      
+      log(`🔄 Keep-alive ativado (ping a cada ${PING_INTERVAL / 60000} minutos)`);
+    }
   });
 })();
