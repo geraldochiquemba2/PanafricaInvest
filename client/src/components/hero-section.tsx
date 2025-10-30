@@ -13,7 +13,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       </div>
 
-      <div className="relative h-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-6">
+      <div className="relative h-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-6 animate-fade-in">
         <h1 className="text-6xl font-bold text-white mb-6 font-heading" data-testid="text-hero-title">
           Invest in Africa's Future
         </h1>
@@ -46,25 +46,45 @@ export function HeroSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-4 gap-8 opacity-80">
-          <div className="flex flex-col items-center">
+        <div className="grid grid-cols-4 gap-8 opacity-90">
+          <a
+            href="https://en.wikipedia.org/wiki/List_of_African_stock_exchanges"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center hover-elevate rounded-lg p-3 transition-all"
+          >
             <Globe className="h-8 w-8 text-white mb-2" />
             <span className="text-sm text-white font-medium">54 Countries</span>
-          </div>
-          <div className="flex flex-col items-center">
+          </a>
+          <a
+            href="https://groq.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center hover-elevate rounded-lg p-3 transition-all"
+          >
             <TrendingUp className="h-8 w-8 text-white mb-2" />
-            <span className="text-sm text-white font-medium">AI Powered</span>
-          </div>
-          <div className="flex flex-col items-center">
+            <span className="text-sm text-white font-medium">Groq AI</span>
+          </a>
+          <a
+            href="https://hedera.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center hover-elevate rounded-lg p-3 transition-all"
+          >
             <Shield className="h-8 w-8 text-white mb-2" />
-            <span className="text-sm text-white font-medium">Hedera Secured</span>
-          </div>
-          <div className="flex flex-col items-center">
+            <span className="text-sm text-white font-medium">Hedera Network</span>
+          </a>
+          <a
+            href="https://hedera.com/users/tokenization"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center hover-elevate rounded-lg p-3 transition-all"
+          >
             <div className="h-8 w-8 text-white mb-2 flex items-center justify-center text-xl font-bold">
               RWA
             </div>
-            <span className="text-sm text-white font-medium">Tokenized Assets</span>
-          </div>
+            <span className="text-sm text-white font-medium">Tokenization</span>
+          </a>
         </div>
       </div>
     </div>

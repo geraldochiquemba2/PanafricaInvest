@@ -22,14 +22,22 @@ export default function Landing() {
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <Link href="/dashboard">
-              <a className="hover:text-primary transition-colors">Markets</a>
+            <Link href="/dashboard" className="hover:text-primary transition-colors cursor-pointer">
+              Markets
             </Link>
-            <a href="#features" className="hover:text-primary transition-colors">
+            <a href="#features" className="hover:text-primary transition-colors cursor-pointer">
               Features
             </a>
-            <a href="#how-it-works" className="hover:text-primary transition-colors">
+            <a href="#how-it-works" className="hover:text-primary transition-colors cursor-pointer">
               How It Works
+            </a>
+            <a
+              href="https://hedera.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors cursor-pointer"
+            >
+              Hedera Network
             </a>
           </nav>
 
@@ -106,23 +114,50 @@ export default function Landing() {
               <div>
                 <h4 className="font-semibold mb-4">Platform</h4>
                 <div className="space-y-2 text-sm text-muted-foreground">
-                  <div>
-                    <Link href="/dashboard">Markets</Link>
-                  </div>
-                  <div>
-                    <a href="#features">Features</a>
-                  </div>
-                  <div>
-                    <a href="#how-it-works">How It Works</a>
-                  </div>
+                  <Link href="/dashboard" className="block hover:text-primary transition-colors cursor-pointer">
+                    Markets
+                  </Link>
+                  <a href="#features" className="block hover:text-primary transition-colors cursor-pointer">
+                    Features
+                  </a>
+                  <a href="#how-it-works" className="block hover:text-primary transition-colors cursor-pointer">
+                    How It Works
+                  </a>
                 </div>
               </div>
               <div>
                 <h4 className="font-semibold mb-4">Technology</h4>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div>Hedera Hashgraph</div>
-                  <div>AI Engine</div>
-                  <div>Security</div>
+                <div className="space-y-2 text-sm">
+                  <div>
+                    <a
+                      href="https://hedera.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                    >
+                      Hedera Hashgraph
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://groq.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                    >
+                      Groq AI Engine
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://hashscan.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                    >
+                      HashScan Explorer
+                    </a>
+                  </div>
                 </div>
               </div>
               <div>

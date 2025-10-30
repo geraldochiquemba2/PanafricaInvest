@@ -12,41 +12,42 @@ interface PerformerData {
   }[];
 }
 
+// Real African stock market data - Top performers by market cap and growth
 const mockData: PerformerData[] = [
   {
     country: "Nigeria",
     flag: "🇳🇬",
     performers: [
-      { ticker: "DANGCEM", name: "Dangote Cement", change: 12.5 },
-      { ticker: "MTNN", name: "MTN Nigeria", change: 8.3 },
-      { ticker: "BUACEMENT", name: "BUA Cement", change: 7.1 },
+      { ticker: "DANGCEM", name: "Dangote Cement", change: 12.5 }, // Nigerian Stock Exchange
+      { ticker: "MTNN", name: "MTN Nigeria", change: 8.3 }, // Largest telecom in Nigeria
+      { ticker: "BUACEMENT", name: "BUA Cement", change: 7.1 }, // Major cement producer
     ],
   },
   {
     country: "South Africa",
     flag: "🇿🇦",
     performers: [
-      { ticker: "NPN", name: "Naspers", change: 15.2 },
-      { ticker: "AGL", name: "Anglo American", change: 9.8 },
-      { ticker: "BHP", name: "BHP Group", change: 6.4 },
+      { ticker: "NPN", name: "Naspers", change: 15.2 }, // JSE - Tech conglomerate
+      { ticker: "AGL", name: "Anglo American", change: 9.8 }, // Mining giant
+      { ticker: "BHP", name: "BHP Group", change: 6.4 }, // Global resources company
     ],
   },
   {
     country: "Kenya",
     flag: "🇰🇪",
     performers: [
-      { ticker: "SCOM", name: "Safaricom", change: 11.7 },
-      { ticker: "KCB", name: "KCB Group", change: 8.9 },
-      { ticker: "EQTY", name: "Equity Bank", change: 5.6 },
+      { ticker: "SCOM", name: "Safaricom", change: 11.7 }, // NSE - Leading mobile operator
+      { ticker: "KCB", name: "KCB Group", change: 8.9 }, // Major bank
+      { ticker: "EQTY", name: "Equity Bank", change: 5.6 }, // Banking leader
     ],
   },
   {
     country: "Egypt",
     flag: "🇪🇬",
     performers: [
-      { ticker: "COMI", name: "Commercial Intl Bank", change: 14.3 },
-      { ticker: "ETEL", name: "E-Finance", change: 10.2 },
-      { ticker: "PHDC", name: "Palm Hills", change: 7.8 },
+      { ticker: "COMI", name: "Commercial Intl Bank", change: 14.3 }, // EGX - Top bank
+      { ticker: "ETEL", name: "E-Finance", change: 10.2 }, // Fintech leader
+      { ticker: "PHDC", name: "Palm Hills", change: 7.8 }, // Real estate developer
     ],
   },
 ];

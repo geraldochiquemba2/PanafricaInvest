@@ -6,9 +6,13 @@ import { PortfolioSummary } from "@/components/portfolio-summary";
 import { PerformanceChart } from "@/components/performance-chart";
 import { AssetTable } from "@/components/asset-table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, TrendingUp, ArrowLeft } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Dashboard() {
+  const [, setLocation] = useLocation();
+  
   const style = {
     "--sidebar-width": "16rem",
     "--sidebar-width-icon": "3rem",
@@ -27,12 +31,22 @@ export default function Dashboard() {
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">
-            <div className="max-w-7xl mx-auto space-y-6">
-              <div>
-                <h1 className="text-4xl font-semibold font-heading mb-2">Dashboard</h1>
-                <p className="text-muted-foreground">
-                  Track your pan-African investment portfolio
-                </p>
+            <div className="max-w-7xl mx-auto space-y-6 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-4xl font-semibold font-heading mb-2">Dashboard</h1>
+                  <p className="text-muted-foreground">
+                    Track your pan-African investment portfolio
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => setLocation("/")}
+                  data-testid="button-back-home"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Home
+                </Button>
               </div>
 
               <PortfolioSummary />

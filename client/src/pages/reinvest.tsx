@@ -4,9 +4,13 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { ReinvestmentAlert } from "@/components/reinvestment-alert";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, RefreshCw, ArrowLeft } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Reinvest() {
+  const [, setLocation] = useLocation();
+  
   const style = {
     "--sidebar-width": "16rem",
     "--sidebar-width-icon": "3rem",
@@ -25,12 +29,22 @@ export default function Reinvest() {
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">
-            <div className="max-w-4xl mx-auto space-y-6">
-              <div>
-                <h1 className="text-4xl font-semibold font-heading mb-2">Reinvestment</h1>
-                <p className="text-muted-foreground">
-                  Smart reinvestment chain powered by AI Agent 3
-                </p>
+            <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-4xl font-semibold font-heading mb-2">Reinvestment</h1>
+                  <p className="text-muted-foreground">
+                    Smart reinvestment chain powered by AI Agent 3
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => setLocation("/dashboard")}
+                  data-testid="button-back"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Dashboard
+                </Button>
               </div>
 
               <Card className="rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">

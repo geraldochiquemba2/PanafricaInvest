@@ -134,14 +134,27 @@ export function InvestmentInstructions() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{step.description}</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    data-testid={`button-${step.action.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {step.action}
-                    <ExternalLink className="ml-2 h-3 w-3" />
-                  </Button>
+                  {step.number === 5 ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.open(`https://hashscan.io/testnet/transaction/${txHash}`, '_blank')}
+                      data-testid={`button-${step.action.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {step.action}
+                      <ExternalLink className="ml-2 h-3 w-3" />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      data-testid={`button-${step.action.toLowerCase().replace(/\s+/g, "-")}`}
+                      onClick={() => console.log(`${step.action} clicked`)}
+                    >
+                      {step.action}
+                      <ExternalLink className="ml-2 h-3 w-3" />
+                    </Button>
+                  )}
                 </div>
                 <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-500 flex-shrink-0" />
               </div>

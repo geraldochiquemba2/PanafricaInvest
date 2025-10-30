@@ -1,10 +1,14 @@
+import { useState, useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { RecommendationCard } from "@/components/recommendation-card";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Loader2, ArrowLeft } from "lucide-react";
+import { useLocation } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
 
 const recommendations = [
   {
@@ -88,6 +92,50 @@ const recommendations = [
 ];
 
 export default function Recommendations() {
+  const [, setLocation] = useLocation();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    const loadRecommendations = async () => {
+      try {
+        // Get user profile from localStorage
+        const savedProfile = localStorage.getItem("userProfile");
+        if (!savedProfile) {
+          setError("No profile found. Please complete the questionnaire first.");
+          setLoading(false);
+          return;
+        }
+
+        const userProfile = JSON.parse(savedProfile);
+        setProfile(userProfile);
+
+        // Call API to generate recommendations using Groq
+        const response = await fetch("/api/recommendations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userProfile),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to generate recommendations");
+        }
+
+        const data = await response.json();
+        setRecommendations(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error loading recommendations:", err);
+        setError("Failed to generate recommendations. Please try again.");
+        setLoading(false);
+      }
+    };
+
+    loadRecommendations();
+  }, []);
+
   const style = {
     "--sidebar-width": "16rem",
     "--sidebar-width-icon": "3rem",
@@ -106,42 +154,83 @@ export default function Recommendations() {
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">
-            <div className="max-w-7xl mx-auto space-y-6">
-              <div>
-                <h1 className="text-4xl font-semibold font-heading mb-2">
-                  AI Recommendations
-                </h1>
-                <p className="text-muted-foreground">
-                  Personalized investment opportunities based on your profile
-                </p>
+            <div className="max-w-7xl mx-auto space-y-6 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-4xl font-semibold font-heading mb-2">
+                    AI Recommendations
+                  </h1>
+                  <p className="text-muted-foreground">
+                    Personalized investment opportunities based on your profile
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => setLocation("/dashboard")}
+                  data-testid="button-back"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Dashboard
+                </Button>
               </div>
 
-              <Card className="rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="h-5 w-5 text-primary" />
+              {loading && (
+                <Card className="rounded-xl">
+                  <CardContent className="p-12 text-center">
+                    <Loader2 className="h-12 w-12 mx-auto mb-4 animate-spin text-primary" />
+                    <div className="font-semibold text-lg mb-2">
+                      AI Agent 2 is analyzing your profile...
                     </div>
-                    <div>
-                      <div className="font-semibold text-lg mb-1">
-                        AI Agent 2: Recommendation Engine Active
+                    <p className="text-sm text-muted-foreground">
+                      Generating personalized recommendations using advanced AI
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {error && (
+                <Card className="rounded-xl border-destructive/50 bg-destructive/10">
+                  <CardContent className="p-6">
+                    <p className="text-destructive">{error}</p>
+                    <Button
+                      className="mt-4"
+                      onClick={() => setLocation("/questionnaire")}
+                    >
+                      Complete Questionnaire
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {!loading && !error && profile && (
+                <>
+                  <Card className="rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
+                    <CardContent className="p-6">
+                      <div className="flex items-start space-x-3">
+                        <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 animate-pulse-slow">
+                          <Sparkles className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-lg mb-1">
+                            AI Agent 2: Recommendation Engine Active
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            We've analyzed your risk profile ({profile.riskTolerance}), investment goals ({profile.investmentGoal}), {profile.horizon}-year horizon, and interest in {profile.sectors.slice(0, 2).join(" and ")} sectors. Here are personalized opportunities across your selected African markets.
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        We've analyzed your risk profile (Low-Medium), investment goals (Wealth
-                        Accumulation), 5-year horizon, and interest in Renewable Energy and
-                        Infrastructure sectors. Here are 6 personalized opportunities across your
-                        selected African markets.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recommendations.map((rec) => (
-                  <RecommendationCard key={rec.ticker} {...rec} />
-                ))}
-              </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {recommendations.map((rec, idx) => (
+                      <div key={rec.ticker} style={{ animationDelay: `${idx * 100}ms` }} className="animate-fade-in">
+                        <RecommendationCard {...rec} />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </main>
         </div>

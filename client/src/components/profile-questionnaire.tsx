@@ -57,12 +57,23 @@ export function ProfileQuestionnaire() {
     );
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < totalSteps) {
       setStep(step + 1);
       console.log(`Moving to step ${step + 1}`);
     } else {
       console.log("Questionnaire completed, generating recommendations...");
+      
+      // Save profile to localStorage for use in recommendations page
+      const profile = {
+        riskTolerance,
+        investmentGoal,
+        horizon: horizon[0],
+        sectors: selectedSectors,
+        countries: selectedCountries.map(c => c.split(" ")[1]), // Remove flag emoji
+      };
+      localStorage.setItem("userProfile", JSON.stringify(profile));
+      
       setLocation("/recommendations");
     }
   };

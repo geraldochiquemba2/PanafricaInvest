@@ -16,8 +16,16 @@ export function WalletConnectButton() {
 
   const connectWallet = (walletType: string) => {
     console.log(`Connecting to ${walletType}...`);
-    setWalletAddress("0.0.123456");
+    // Simulate wallet connection with realistic Hedera account ID
+    const accountId = `0.0.${Math.floor(Math.random() * 999999) + 100000}`;
+    setWalletAddress(accountId);
     setIsConnected(true);
+    
+    // In a real app, this would:
+    // 1. Import @hashgraph/sdk
+    // 2. Connect to user's wallet (HashPack, Blade, etc.)
+    // 3. Get actual account ID from wallet
+    // 4. Store wallet session
   };
 
   if (isConnected) {
