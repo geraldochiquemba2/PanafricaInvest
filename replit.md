@@ -133,9 +133,37 @@ SESSION_SECRET - Segredo para sessões
 ## Comandos
 
 ```bash
-npm run dev  # Inicia aplicação (Express + Vite)
-npm install  # Instala dependências
+npm run dev    # Inicia aplicação (Express + Vite)
+npm run build  # Build para produção
+npm start      # Inicia em modo produção
+npm install    # Instala dependências
+npm run db:push # Push schema do banco de dados
 ```
+
+## Deploy e Hospedagem
+
+### Render.com (Configurado)
+✅ Configuração completa para deployment no Render.com:
+- **render.yaml** - Blueprint automático de deployment
+- **DEPLOYMENT.md** - Guia completo de deploy passo a passo
+- **.env.example** - Template de variáveis de ambiente
+
+**Arquivos de Configuração:**
+- `render.yaml` - Define web service e PostgreSQL database
+- `DEPLOYMENT.md` - Instruções detalhadas com opções de keep-alive
+- `.env.example` - Variáveis necessárias documentadas
+
+**Keep Alive (Sempre Online):**
+- Plano Starter: Serviço dorme após 15 min de inatividade
+- Plano Starter Plus ($7/mês): Sempre online
+- UptimeRobot/Cron-Job: Ping automático para manter ativo no plano gratuito
+
+**Deploy Automático:**
+1. Push código para GitHub/GitLab
+2. Conectar repositório no Render
+3. Usar Blueprint (render.yaml detectado automaticamente)
+4. Adicionar apenas GROQ_API_KEY manualmente
+5. Deploy automático em cada push
 
 ## Notas Técnicas
 
