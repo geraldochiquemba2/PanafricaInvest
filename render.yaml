@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: panafrica-invest
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: panafrica-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: GROQ_API_KEY
+        sync: false
+
+databases:
+  - name: panafrica-db
+    databaseName: panafrica
+    user: panafrica_user
+    region: oregon
+    plan: starter
