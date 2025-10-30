@@ -36,8 +36,8 @@ export default function Login() {
     mutationFn: async (data: LoginForm) => {
       return await apiRequest("POST", "/api/login", data);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+    onSuccess: async () => {
+      await queryClient.refetchQueries({ queryKey: ["/api/user"] });
       toast({
         title: "Login successful",
         description: "Welcome back to Panafrica Invest!",
