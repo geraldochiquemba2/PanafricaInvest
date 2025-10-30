@@ -3,8 +3,6 @@ import {
   TrendingUp,
   Wallet,
   RefreshCw,
-  User,
-  Settings,
 } from "lucide-react";
 import {
   Sidebar,
@@ -42,19 +40,6 @@ const menuItems = [
   },
 ];
 
-const settingsItems = [
-  {
-    title: "Profile",
-    url: "/profile",
-    icon: User,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-  },
-];
-
 export function AppSidebar() {
   const [location] = useLocation();
 
@@ -74,32 +59,6 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = location === item.url;
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      className={isActive ? "bg-sidebar-accent" : ""}
-                      data-testid={`sidebar-${item.title.toLowerCase()}`}
-                    >
-                      <Link href={item.url}>
-                        <Icon className="h-5 w-5" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Account</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {settingsItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location === item.url;
                 return (

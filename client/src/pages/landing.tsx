@@ -3,7 +3,7 @@ import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard"
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, LogOut, TrendingUp, Globe } from "lucide-react";
+import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -82,6 +82,12 @@ export default function Landing() {
           <div className="flex items-center space-x-3">
             {isAuthenticated && user ? (
               <>
+                <Link href="/dashboard">
+                  <Button size="sm" data-testid="button-go-dashboard">
+                    <LayoutDashboard className="h-4 w-4 mr-2" />
+                    Go to Dashboard
+                  </Button>
+                </Link>
                 <Badge variant="secondary" className="text-sm" data-testid="text-user-balance">
                   ${parseFloat(user.balance).toFixed(2)}
                 </Badge>
