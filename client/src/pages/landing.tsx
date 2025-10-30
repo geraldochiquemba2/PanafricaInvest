@@ -3,12 +3,7 @@ import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard"
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard, Calculator, Target, Newspaper, MessageCircle } from "lucide-react";
-import { useAuth } from "@/contexts/auth-context";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { Badge } from "@/components/ui/badge";
+import { ArrowRight, TrendingUp, Globe, LayoutDashboard, Calculator, Target, Newspaper, MessageCircle } from "lucide-react";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
 import africaMapImage from "@assets/africa_map.png";
 import goalImage from "@assets/stock_images/financial_goals_targ_43b90333.jpg";
@@ -39,31 +34,6 @@ const BackgroundVideo = memo(() => {
 BackgroundVideo.displayName = "BackgroundVideo";
 
 export default function Landing() {
-  const { user, isAuthenticated } = useAuth();
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      const response = await apiRequest("POST", "/api/logout", {});
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
-      toast({
-        title: "Logged out",
-        description: "You have been successfully logged out",
-      });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Logout failed",
-        description: "Unable to log out. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
   return (
     <div className="min-h-screen">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/20 backdrop-blur-sm border-b border-white/10">
@@ -95,41 +65,12 @@ export default function Landing() {
                 News
               </Button>
             </Link>
-            {isAuthenticated && user ? (
-              <>
-                <Link href="/dashboard">
-                  <Button size="sm" data-testid="button-go-dashboard">
-                    <LayoutDashboard className="h-4 w-4 mr-2" />
-                    Go to Dashboard
-                  </Button>
-                </Link>
-                <Badge variant="secondary" className="text-sm" data-testid="text-user-balance">
-                  ${parseFloat(user.balance).toFixed(2)}
-                </Badge>
-                <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => logoutMutation.mutate()}
-                  data-testid="button-logout"
-                >
-                  <LogOut className="h-4 w-4" />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login">
-                  <Button variant="ghost" size="sm" data-testid="button-login-link">
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/register">
-                  <Button size="sm" data-testid="button-register-link">
-                    Register
-                  </Button>
-                </Link>
-              </>
-            )}
+            <Link href="/dashboard">
+              <Button size="sm" data-testid="button-go-dashboard">
+                <LayoutDashboard className="h-4 w-4 mr-2" />
+                Dashboard
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
