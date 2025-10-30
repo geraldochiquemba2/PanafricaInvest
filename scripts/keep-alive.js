@@ -18,7 +18,7 @@ const https = require('https');
 const http = require('http');
 
 const APP_URL = process.env.RENDER_APP_URL;
-const PING_INTERVAL = 5 * 60 * 1000; // 5 minutos em millisegundos
+const PING_INTERVAL = 10 * 60 * 1000; // 10 minutos em millisegundos
 
 if (!APP_URL) {
   console.error('❌ ERRO: Defina a variável de ambiente RENDER_APP_URL');
