@@ -14,6 +14,7 @@ import africaMapImage from "@assets/africa_map.png";
 import goalImage from "@assets/stock_images/financial_goals_targ_43b90333.jpg";
 import analysisImage from "@assets/stock_images/ai_data_analysis_cha_b8d02db4.jpg";
 import marketsImage from "@assets/stock_images/global_markets_world_182bfbc9.jpg";
+import simulatorBg from "@assets/stock_images/african_business_inv_54b9c5fd.jpg";
 import { memo, useRef, useEffect } from "react";
 
 const BackgroundVideo = memo(() => {
@@ -126,8 +127,13 @@ export default function Landing() {
         <TopPerformersScoreboard />
         <FeatureCards />
 
-        <div className="py-20 px-6 bg-gradient-to-br from-primary/10 via-background to-primary/5">
-          <div className="max-w-5xl mx-auto">
+        <div className="py-20 px-6 relative overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${simulatorBg})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95" />
+          <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-12">
               <div className="inline-flex items-center justify-center p-3 rounded-full bg-primary/10 mb-6">
                 <Calculator className="h-8 w-8 text-primary" />
