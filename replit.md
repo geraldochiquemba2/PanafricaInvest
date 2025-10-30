@@ -33,6 +33,7 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 - `/` - Landing page com hero, features, top performers
 - `/questionnaire` - Questionário de perfil do investidor (4 etapas)
 - `/dashboard` - Dashboard com portfólio, gráficos, tabela de ativos
+- `/news` - Notícias financeiras em tempo real da África (GDELT API)
 - `/recommendations` - Recomendações personalizadas da IA
 - `/reinvest` - Alertas de reinvestimento inteligente
 
@@ -57,6 +58,7 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 #### IA & Investimentos
 - `POST /api/recommendations` - Gera recomendações usando Groq
 - `POST /api/reinvestment-suggestion` - Sugere próximo investimento
+- `GET /api/news` - Busca notícias financeiras da África via GDELT API
 
 ## Dados Reais
 
@@ -72,6 +74,7 @@ Plataforma de investimento digital pan-africana que conecta investidores globais
 - [HashScan Explorer](https://hashscan.io/)
 - [African Stock Exchanges](https://en.wikipedia.org/wiki/List_of_African_stock_exchanges)
 - [Hedera Tokenization](https://hedera.com/users/tokenization)
+- [GDELT Project](https://www.gdeltproject.org/) - API de notícias globais
 
 ## Fluxo de Usuário
 
