@@ -3,7 +3,7 @@ import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard"
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard, Calculator, Target, Newspaper } from "lucide-react";
+import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard, Calculator, Target, Newspaper, MessageCircle } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -83,6 +83,12 @@ export default function Landing() {
           </Link>
 
           <div className="flex items-center space-x-3">
+            <Link href="/ask-ai">
+              <Button variant="ghost" size="sm" data-testid="button-ask-ai-link">
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Ask AI
+              </Button>
+            </Link>
             <Link href="/news">
               <Button variant="ghost" size="sm" data-testid="button-news-link">
                 <Newspaper className="h-4 w-4 mr-2" />

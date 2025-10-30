@@ -16,6 +16,7 @@ import Register from "@/pages/register";
 import Markets from "@/pages/markets";
 import InvestmentSimulator from "@/pages/investment-simulator";
 import News from "@/pages/news";
+import AIChat from "@/pages/ai-chat";
 import { useEffect } from "react";
 
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
@@ -68,6 +69,7 @@ function Router() {
           {() => <ProtectedRoute component={Dashboard} />}
         </Route>
         <Route path="/news" component={News} />
+        <Route path="/ask-ai" component={AIChat} />
         <Route path="/recommendations" component={Recommendations} />
         <Route path="/reinvest">
           {() => <ProtectedRoute component={Reinvest} />}

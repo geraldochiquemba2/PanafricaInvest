@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import bcrypt from "bcryptjs";
 import { storage } from "./storage";
-import { generateRecommendations, generateReinvestmentSuggestion, generateMarketAnalysis } from "./groq-service";
+import { generateRecommendations, generateReinvestmentSuggestion, generateMarketAnalysis, generateChatResponse } from "./groq-service";
 import { insertUserSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -165,6 +165,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error generating market analysis:", error);
       res.status(500).json({ error: "Failed to generate market analysis" });
+    }
+  });
+
+  // AI Chat endpoint (public - no auth required)
+  app.post("/api/ai-chat", async (req, res) => {
+    try {
+      const { message, conversationHistory } = req.body;
+
+      if (!message || typeof message !== 'string') {
+        return res.status(400).json({ error: "Message is required" });
+      }
+
+      const response = await generateChatResponse(message, conversationHistory || []);
+      res.json({ response });
+    } catch (error) {
+      console.error("Error in AI chat:", error);
+      res.status(500).json({ error: "Failed to generate response" });
     }
   });
 

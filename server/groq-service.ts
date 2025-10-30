@@ -242,3 +242,46 @@ Return ONLY valid JSON array with this structure:
     throw new Error("Failed to generate market analysis");
   }
 }
+
+export async function generateChatResponse(
+  userMessage: string,
+  conversationHistory: Array<{ role: string; content: string }>
+): Promise<string> {
+  const systemPrompt = `You are an expert AI investment advisor for Panafrica Invest, a platform focused on African markets. Your role is to:
+
+1. Answer questions about investing in African markets (all 54 countries)
+2. Explain platform features like:
+   - AI-powered investment recommendations
+   - Portfolio tracking and reinvestment chain
+   - Real-time market analysis
+   - Investment simulator
+   - News feed
+3. Provide general investment guidance for African economies
+4. Discuss sectors like: agriculture, technology, renewable energy, infrastructure, mining, banking
+5. Explain how the platform uses Groq AI and Hedera blockchain
+
+Be friendly, informative, and professional. Keep responses concise but comprehensive. If asked about specific investments, remind users this is educational information, not financial advice.`;
+
+  try {
+    const messages: any[] = [
+      { role: "system", content: systemPrompt },
+      ...conversationHistory.slice(-5).map(msg => ({
+        role: msg.role,
+        content: msg.content
+      })),
+      { role: "user", content: userMessage }
+    ];
+
+    const completion = await groq.chat.completions.create({
+      messages,
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
+
+    return completion.choices[0]?.message?.content || "I apologize, but I'm having trouble generating a response. Please try again.";
+  } catch (error) {
+    console.error("Error generating chat response:", error);
+    throw new Error("Failed to generate chat response");
+  }
+}
