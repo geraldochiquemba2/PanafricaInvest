@@ -140,6 +140,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
+      // Validate inputs
+      if (typeof currentAmount !== 'number' || currentAmount <= 0) {
+        return res.status(400).json({ error: "Current amount must be a positive number" });
+      }
+      if (typeof targetAmount !== 'number' || targetAmount <= currentAmount) {
+        return res.status(400).json({ error: "Target amount must be greater than current amount" });
+      }
+      if (typeof timeHorizon !== 'number' || timeHorizon < 1 || timeHorizon > 50) {
+        return res.status(400).json({ error: "Time horizon must be between 1 and 50 years" });
+      }
+
       const analysis = await generateMarketAnalysis(
         currentAmount,
         targetAmount,
