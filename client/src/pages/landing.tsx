@@ -10,6 +10,28 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
+import { memo, useRef, useEffect } from "react";
+
+const BackgroundVideo = memo(() => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  return (
+    <div className="absolute inset-0">
+      <iframe
+        ref={iframeRef}
+        className="absolute top-1/2 left-1/2 w-[177.77vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+        src="https://www.youtube.com/embed/zwUsFN__jtE?autoplay=1&mute=1&loop=1&playlist=zwUsFN__jtE&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&iv_load_policy=3&disablekb=1"
+        title="How it works background video"
+        frameBorder="0"
+        allow="autoplay; encrypted-media"
+        style={{ pointerEvents: 'none', opacity: 0.5 }}
+      />
+      <div className="absolute inset-0 bg-background/40 dark:bg-background/50" />
+    </div>
+  );
+});
+
+BackgroundVideo.displayName = "BackgroundVideo";
 
 export default function Landing() {
   const { user, isAuthenticated } = useAuth();
@@ -97,17 +119,7 @@ export default function Landing() {
         <FeatureCards />
 
         <div id="how-it-works" className="py-24 px-6 bg-muted/30 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <iframe
-              className="absolute top-1/2 left-1/2 w-[177.77vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-              src="https://www.youtube.com/embed/zwUsFN__jtE?autoplay=1&mute=1&loop=1&playlist=zwUsFN__jtE&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&iv_load_policy=3&disablekb=1"
-              title="How it works background video"
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              style={{ pointerEvents: 'none', opacity: 0.5 }}
-            />
-            <div className="absolute inset-0 bg-background/40 dark:bg-background/50" />
-          </div>
+          <BackgroundVideo />
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-semibold mb-4 font-heading">How It Works</h2>
