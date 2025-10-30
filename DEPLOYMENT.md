@@ -112,35 +112,41 @@ npm install && npm run build && npm run db:push
 
 ## Keep Alive (Sempre Online)
 
-### Plano Gratuito (Starter)
-- O serviço "dorme" após 15 minutos de inatividade
-- Demora ~30 segundos para "acordar" na primeira requisição
+### ⚡ Solução Automática Implementada!
 
-### Manter Sempre Online - Opções:
+A aplicação já possui um sistema completo de **keep-alive** para não hibernar no plano gratuito!
+
+✅ **Endpoint `/health`** criado e otimizado  
+✅ **GitHub Action** configurado (executa a cada 5 minutos)  
+✅ **Script Node.js** alternativo disponível  
+✅ **Compatível** com UptimeRobot e Cron-Job.org  
+
+### 📖 Guia Completo
+
+Consulte o arquivo **[KEEP-ALIVE.md](./KEEP-ALIVE.md)** para instruções detalhadas.
+
+### 🚀 Configuração Rápida (GitHub Actions)
+
+1. No GitHub, vá para **Settings** → **Secrets and variables** → **Actions**
+2. Adicione um novo secret:
+   - Nome: `RENDER_APP_URL`
+   - Valor: `https://seu-app.onrender.com`
+3. Habilite workflows na aba **Actions**
+4. Pronto! A aplicação não hibernará mais
+
+### 💰 Outras Opções
 
 #### Opção 1: Upgrade para Plano Pago
 - Plano **Starter Plus** ($7/mês): Sempre online
 - Sem sleep automático
 - Melhor performance
 
-#### Opção 2: Ping Automático (Plano Gratuito)
-Use um serviço externo para fazer ping:
+#### Opção 2: Serviços Externos (Gratuito)
+- **UptimeRobot**: Monitor HTTP a cada 5 minutos
+- **Cron-Job.org**: Cron job periódico
+- Veja instruções detalhadas em [KEEP-ALIVE.md](./KEEP-ALIVE.md)
 
-**UptimeRobot** (gratuito):
-1. Acesse [uptimerobot.com](https://uptimerobot.com)
-2. Adicione um novo monitor:
-   - **Type**: HTTP(s)
-   - **URL**: Sua URL do Render
-   - **Interval**: 5 minutos
-3. Isso impedirá que o serviço durma
-
-**Cron-Job.org** (gratuito):
-1. Acesse [cron-job.org](https://cron-job.org)
-2. Crie um novo cron job
-3. Configure para chamar sua URL a cada 5-10 minutos
-
-**Limitações do método de ping:**
-- Consume minutos gratuitos mais rapidamente
+**Consumo com Keep-Alive:**
 - Render oferece 750 horas/mês no plano gratuito
 - Com ping a cada 5 min = ~720 horas/mês (suficiente)
 

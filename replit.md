@@ -143,27 +143,34 @@ npm run db:push # Push schema do banco de dados
 ## Deploy e Hospedagem
 
 ### Render.com (Configurado)
-✅ Configuração completa para deployment no Render.com:
+✅ Configuração completa para deployment no Render.com com **keep-alive automático**:
 - **render.yaml** - Blueprint automático de deployment
 - **DEPLOYMENT.md** - Guia completo de deploy passo a passo
+- **KEEP-ALIVE.md** - Sistema automático para não hibernar
 - **.env.example** - Template de variáveis de ambiente
 
 **Arquivos de Configuração:**
 - `render.yaml` - Define web service e PostgreSQL database
-- `DEPLOYMENT.md` - Instruções detalhadas com opções de keep-alive
+- `DEPLOYMENT.md` - Instruções detalhadas de deployment
+- `KEEP-ALIVE.md` - Configuração de keep-alive (não hibernar)
 - `.env.example` - Variáveis necessárias documentadas
+- `.github/workflows/keep-alive.yml` - GitHub Action para ping automático
+- `scripts/keep-alive.js` - Script Node.js alternativo
 
-**Keep Alive (Sempre Online):**
-- Plano Starter: Serviço dorme após 15 min de inatividade
-- Plano Starter Plus ($7/mês): Sempre online
-- UptimeRobot/Cron-Job: Ping automático para manter ativo no plano gratuito
+**Keep Alive Implementado:**
+- ✅ Endpoint `/health` otimizado para health checks
+- ✅ GitHub Action para ping automático a cada 5 minutos
+- ✅ Script Node.js alternativo disponível
+- ✅ Compatível com UptimeRobot e Cron-Job.org
+- ✅ **Aplicação não hiberna no plano gratuito!**
 
 **Deploy Automático:**
 1. Push código para GitHub/GitLab
 2. Conectar repositório no Render
 3. Usar Blueprint (render.yaml detectado automaticamente)
 4. Adicionar apenas GROQ_API_KEY manualmente
-5. Deploy automático em cada push
+5. Configurar secret RENDER_APP_URL no GitHub (para keep-alive)
+6. Deploy automático em cada push
 
 ## Notas Técnicas
 

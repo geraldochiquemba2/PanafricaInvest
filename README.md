@@ -33,7 +33,7 @@ npm start
 
 ## 🌐 Deploy
 
-A aplicação está configurada para deployment no **Render.com**. 
+A aplicação está configurada para deployment no **Render.com** com **keep-alive automático**!
 
 Para instruções detalhadas de deployment, consulte o arquivo **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
 
@@ -44,6 +44,16 @@ Para instruções detalhadas de deployment, consulte o arquivo **[DEPLOYMENT.md]
 3. Conecte seu repositório
 4. Adicione a variável `GROQ_API_KEY`
 5. Deploy automático!
+
+### ⚡ Keep Alive (Não Hibernar)
+
+A aplicação **não hibernará** no plano gratuito do Render!
+
+✅ Sistema de keep-alive já implementado  
+✅ GitHub Action configurado  
+✅ Endpoint `/health` otimizado  
+
+**Configuração:** Consulte **[KEEP-ALIVE.md](./KEEP-ALIVE.md)**
 
 ## 📝 Variáveis de Ambiente
 

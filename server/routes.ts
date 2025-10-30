@@ -6,6 +6,11 @@ import { generateRecommendations, generateReinvestmentSuggestion, generateMarket
 import { insertUserSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint (lightweight for keep-alive)
+  app.get("/health", (_req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Auth: Register
   app.post("/api/register", async (req, res) => {
     try {
