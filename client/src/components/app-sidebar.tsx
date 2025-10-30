@@ -17,7 +17,7 @@ import {
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 
 const menuItems = [
   {
@@ -83,10 +83,10 @@ export function AppSidebar() {
                       className={isActive ? "bg-sidebar-accent" : ""}
                       data-testid={`sidebar-${item.title.toLowerCase()}`}
                     >
-                      <a href={item.url}>
+                      <Link href={item.url}>
                         <Icon className="h-5 w-5" />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -109,10 +109,10 @@ export function AppSidebar() {
                       className={isActive ? "bg-sidebar-accent" : ""}
                       data-testid={`sidebar-${item.title.toLowerCase()}`}
                     >
-                      <a href={item.url}>
+                      <Link href={item.url}>
                         <Icon className="h-5 w-5" />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
