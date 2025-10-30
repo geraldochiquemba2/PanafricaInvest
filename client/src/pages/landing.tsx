@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { Link } from "wouter";
-import { ArrowRight, LogOut } from "lucide-react";
+import { ArrowRight, LogOut, TrendingUp, Globe } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -44,11 +44,18 @@ export default function Landing() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/">
-            <div className="flex items-center space-x-2 cursor-pointer">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">PA</span>
+            <div className="flex items-center space-x-3 cursor-pointer group">
+              <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
+                <div className="absolute inset-0 rounded-xl bg-primary/20 blur-sm"></div>
+                <div className="relative flex items-center justify-center">
+                  <Globe className="h-5 w-5 text-primary-foreground absolute opacity-40" />
+                  <TrendingUp className="h-4 w-4 text-primary-foreground relative translate-x-0.5 translate-y-0.5" />
+                </div>
               </div>
-              <span className="font-heading font-bold text-lg">Panafrica Invest</span>
+              <div className="flex flex-col">
+                <span className="font-heading font-bold text-lg leading-none">Panafrica Invest</span>
+                <span className="text-[10px] text-muted-foreground font-medium">Powered by AI</span>
+              </div>
             </div>
           </Link>
 
