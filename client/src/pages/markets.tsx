@@ -14,6 +14,8 @@ interface AfricanMarket {
   website: string;
   region: string;
   active: boolean;
+  marketCap?: string;
+  founded?: string;
 }
 
 const africanMarkets: AfricanMarket[] = [
@@ -25,15 +27,19 @@ const africanMarkets: AfricanMarket[] = [
     website: "https://www.jse.co.za/",
     region: "Southern Africa",
     active: true,
+    marketCap: "$1+ trillion",
+    founded: "1887",
   },
   {
     country: "Nigeria",
     flag: "🇳🇬",
-    exchange: "Nigerian Exchange Group",
+    exchange: "Nigerian Exchange Limited",
     exchangeCode: "NGX",
     website: "https://ngxgroup.com/",
     region: "West Africa",
     active: true,
+    marketCap: "$49.56 billion",
+    founded: "1960",
   },
   {
     country: "Egypt",
@@ -43,6 +49,30 @@ const africanMarkets: AfricanMarket[] = [
     website: "https://www.egx.com.eg/en/homepage.aspx",
     region: "North Africa",
     active: true,
+    marketCap: "$40.3 billion",
+    founded: "1883",
+  },
+  {
+    country: "Morocco",
+    flag: "🇲🇦",
+    exchange: "Casablanca Stock Exchange",
+    exchangeCode: "BVC",
+    website: "https://www.casablanca-bourse.com/",
+    region: "North Africa",
+    active: true,
+    marketCap: "$69.8 billion",
+    founded: "1929",
+  },
+  {
+    country: "Botswana",
+    flag: "🇧🇼",
+    exchange: "Botswana Stock Exchange",
+    exchangeCode: "BSE",
+    website: "https://www.bse.co.bw/",
+    region: "Southern Africa",
+    active: true,
+    marketCap: "$43.94 billion",
+    founded: "1989",
   },
   {
     country: "Kenya",
@@ -52,15 +82,8 @@ const africanMarkets: AfricanMarket[] = [
     website: "https://www.nse.co.ke/",
     region: "East Africa",
     active: true,
-  },
-  {
-    country: "Morocco",
-    flag: "🇲🇦",
-    exchange: "Casablanca Stock Exchange",
-    exchangeCode: "CSE",
-    website: "https://www.casablanca-bourse.com/",
-    region: "North Africa",
-    active: true,
+    marketCap: "$13.6 billion",
+    founded: "1954",
   },
   {
     country: "Ghana",
@@ -70,23 +93,45 @@ const africanMarkets: AfricanMarket[] = [
     website: "https://gse.com.gh/",
     region: "West Africa",
     active: true,
+    marketCap: "$6.35 billion",
+    founded: "1989",
+  },
+  {
+    country: "Mauritius",
+    flag: "🇲🇺",
+    exchange: "Stock Exchange of Mauritius",
+    exchangeCode: "SEM",
+    website: "https://www.stockexchangeofmauritius.com/",
+    region: "East Africa",
+    active: true,
+    marketCap: "$7.4 billion",
   },
   {
     country: "Tunisia",
     flag: "🇹🇳",
-    exchange: "Tunis Stock Exchange",
+    exchange: "Bourse de Tunis",
     exchangeCode: "BVMT",
     website: "https://www.bvmt.com.tn/",
     region: "North Africa",
     active: true,
   },
   {
-    country: "Botswana",
-    flag: "🇧🇼",
-    exchange: "Botswana Stock Exchange",
-    exchangeCode: "BSE",
-    website: "https://www.bse.co.bw/",
+    country: "Zimbabwe",
+    flag: "🇿🇼",
+    exchange: "Zimbabwe Stock Exchange",
+    exchangeCode: "ZSE",
+    website: "https://www.zse.co.zw/",
     region: "Southern Africa",
+    active: true,
+    founded: "1946",
+  },
+  {
+    country: "Tanzania",
+    flag: "🇹🇿",
+    exchange: "Dar es Salaam Stock Exchange",
+    exchangeCode: "DSE",
+    website: "https://www.dse.co.tz/",
+    region: "East Africa",
     active: true,
   },
   {
@@ -99,33 +144,6 @@ const africanMarkets: AfricanMarket[] = [
     active: true,
   },
   {
-    country: "Tanzania",
-    flag: "🇹🇿",
-    exchange: "Dar es Salaam Stock Exchange",
-    exchangeCode: "DSE",
-    website: "https://www.dse.co.tz/",
-    region: "East Africa",
-    active: true,
-  },
-  {
-    country: "Mauritius",
-    flag: "🇲🇺",
-    exchange: "Stock Exchange of Mauritius",
-    exchangeCode: "SEM",
-    website: "https://www.stockexchangeofmauritius.com/",
-    region: "East Africa",
-    active: true,
-  },
-  {
-    country: "Zimbabwe",
-    flag: "🇿🇼",
-    exchange: "Zimbabwe Stock Exchange",
-    exchangeCode: "ZSE",
-    website: "https://www.zse.co.zw/",
-    region: "Southern Africa",
-    active: true,
-  },
-  {
     country: "Namibia",
     flag: "🇳🇦",
     exchange: "Namibian Stock Exchange",
@@ -135,30 +153,21 @@ const africanMarkets: AfricanMarket[] = [
     active: true,
   },
   {
-    country: "Zambia",
-    flag: "🇿🇲",
-    exchange: "Lusaka Securities Exchange",
-    exchangeCode: "LuSE",
-    website: "https://www.luse.co.zm/",
-    region: "Southern Africa",
-    active: true,
-  },
-  {
-    country: "Ivory Coast",
-    flag: "🇨🇮",
-    exchange: "BRVM",
-    exchangeCode: "BRVM",
-    website: "https://www.brvm.org/",
-    region: "West Africa",
-    active: true,
-  },
-  {
     country: "Rwanda",
     flag: "🇷🇼",
     exchange: "Rwanda Stock Exchange",
     exchangeCode: "RSE",
     website: "https://www.rse.rw/",
     region: "East Africa",
+    active: true,
+  },
+  {
+    country: "Zambia",
+    flag: "🇿🇲",
+    exchange: "Lusaka Stock Exchange",
+    exchangeCode: "LuSE",
+    website: "https://www.luse.co.zm/",
+    region: "Southern Africa",
     active: true,
   },
   {
@@ -177,7 +186,8 @@ const africanMarkets: AfricanMarket[] = [
     exchangeCode: "ESX",
     website: "https://www.ethiopiansc.com/",
     region: "East Africa",
-    active: false,
+    active: true,
+    founded: "2025",
   },
   {
     country: "Algeria",
@@ -189,9 +199,110 @@ const africanMarkets: AfricanMarket[] = [
     active: true,
   },
   {
-    country: "Senegal",
-    flag: "🇸🇳",
-    exchange: "BRVM (Regional)",
+    country: "Angola",
+    flag: "🇦🇴",
+    exchange: "Bolsa de Dívida e Valores de Angola",
+    exchangeCode: "BODIVA",
+    website: "https://www.bodiva.co.ao/",
+    region: "Southern Africa",
+    active: true,
+  },
+  {
+    country: "Mozambique",
+    flag: "🇲🇿",
+    exchange: "Mozambique Stock Exchange",
+    exchangeCode: "BVM",
+    website: "https://www.bvm.co.mz/",
+    region: "Southern Africa",
+    active: true,
+  },
+  {
+    country: "Eswatini",
+    flag: "🇸🇿",
+    exchange: "Eswatini Stock Exchange",
+    exchangeCode: "ESE",
+    website: "https://www.ssx.org.sz/",
+    region: "Southern Africa",
+    active: true,
+  },
+  {
+    country: "Cameroon",
+    flag: "🇨🇲",
+    exchange: "Douala Stock Exchange",
+    exchangeCode: "DSX",
+    website: "https://www.douala-stock-exchange.com/",
+    region: "Central Africa",
+    active: true,
+  },
+  {
+    country: "Sudan",
+    flag: "🇸🇩",
+    exchange: "Khartoum Stock Exchange",
+    exchangeCode: "KSE",
+    website: "https://www.kse.sd/",
+    region: "North Africa",
+    active: true,
+  },
+  {
+    country: "Cape Verde",
+    flag: "🇨🇻",
+    exchange: "Bolsa de Valores de Cabo Verde",
+    exchangeCode: "BVC",
+    website: "https://www.bvc.cv/",
+    region: "West Africa",
+    active: true,
+  },
+  {
+    country: "Seychelles",
+    flag: "🇸🇨",
+    exchange: "Merj Exchange Limited",
+    exchangeCode: "MERJ",
+    website: "https://merj.exchange/",
+    region: "East Africa",
+    active: true,
+  },
+  {
+    country: "Libya",
+    flag: "🇱🇾",
+    exchange: "Libya Stock Market",
+    exchangeCode: "LSM",
+    website: "https://www.lsm.ly/",
+    region: "North Africa",
+    active: true,
+  },
+  {
+    country: "Somalia",
+    flag: "🇸🇴",
+    exchange: "Somali Stock Exchange",
+    exchangeCode: "SSE",
+    website: "#",
+    region: "East Africa",
+    active: false,
+  },
+  {
+    country: "BRVM Regional",
+    flag: "🌍",
+    exchange: "Bourse Régionale des Valeurs Mobilières",
+    exchangeCode: "BRVM",
+    website: "https://www.brvm.org/",
+    region: "West Africa",
+    active: true,
+    marketCap: "$13.8 billion",
+    founded: "1996",
+  },
+  {
+    country: "Gabon",
+    flag: "🇬🇦",
+    exchange: "BVMAC (Central Africa Regional)",
+    exchangeCode: "BVMAC",
+    website: "https://www.bvmac.com/",
+    region: "Central Africa",
+    active: true,
+  },
+  {
+    country: "Côte d'Ivoire",
+    flag: "🇨🇮",
+    exchange: "BRVM (Headquarters)",
     exchangeCode: "BRVM",
     website: "https://www.brvm.org/",
     region: "West Africa",
@@ -199,7 +310,7 @@ const africanMarkets: AfricanMarket[] = [
   },
 ];
 
-const regions = ["All", "North Africa", "West Africa", "East Africa", "Southern Africa"];
+const regions = ["All", "North Africa", "West Africa", "East Africa", "Southern Africa", "Central Africa"];
 
 export default function Markets() {
   const [selectedRegion, setSelectedRegion] = useState("All");
@@ -215,7 +326,7 @@ export default function Markets() {
           <Link href="/">
             <Button variant="ghost" size="sm" data-testid="button-back-home">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Voltar
+              Back
             </Button>
           </Link>
           <ThemeToggle />
@@ -225,11 +336,12 @@ export default function Markets() {
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-12">
           <h1 className="text-4xl font-bold mb-4 font-heading" data-testid="text-markets-title">
-            Mercados Africanos
+            African Markets
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl">
-            Explore todas as bolsas de valores da África. Acesse informações em tempo real e
-            oportunidades de investimento em todo o continente.
+            Explore all African stock exchanges. Access real-time information and
+            investment opportunities across the continent. Africa now has 30 stock exchanges
+            with a combined market capitalization of approximately $1.6 trillion.
           </p>
         </div>
 
@@ -241,7 +353,7 @@ export default function Markets() {
               onClick={() => setSelectedRegion(region)}
               data-testid={`button-filter-${region.toLowerCase().replace(" ", "-")}`}
             >
-              {region === "All" ? "Todos" : region}
+              {region}
             </Button>
           ))}
         </div>
@@ -269,22 +381,34 @@ export default function Markets() {
                   {market.active && (
                     <Badge variant="outline" className="text-green-600 border-green-600 dark:text-green-500 dark:border-green-500">
                       <TrendingUp className="h-3 w-3 mr-1" />
-                      Ativo
+                      Active
                     </Badge>
                   )}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <div className="text-sm font-medium mb-1">Bolsa de Valores</div>
+                  <div className="text-sm font-medium mb-1">Stock Exchange</div>
                   <div className="text-sm text-muted-foreground">{market.exchange}</div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-1">Região</div>
+                  <div className="text-sm font-medium mb-1">Region</div>
                   <Badge variant="outline" className="text-xs">
                     {market.region}
                   </Badge>
                 </div>
+                {market.marketCap && (
+                  <div>
+                    <div className="text-sm font-medium mb-1">Market Cap</div>
+                    <div className="text-sm font-mono text-muted-foreground">{market.marketCap}</div>
+                  </div>
+                )}
+                {market.founded && (
+                  <div>
+                    <div className="text-sm font-medium mb-1">Founded</div>
+                    <div className="text-sm text-muted-foreground">{market.founded}</div>
+                  </div>
+                )}
                 <a
                   href={market.website}
                   target="_blank"
@@ -296,7 +420,7 @@ export default function Markets() {
                     className="w-full"
                     data-testid={`button-visit-${market.country.toLowerCase().replace(" ", "-")}`}
                   >
-                    Visitar Site Oficial
+                    Visit Official Website
                     <ExternalLink className="h-4 w-4 ml-2" />
                   </Button>
                 </a>
@@ -308,26 +432,31 @@ export default function Markets() {
         {filteredMarkets.length === 0 && (
           <div className="text-center py-12">
             <p className="text-muted-foreground">
-              Nenhum mercado encontrado para esta região.
+              No markets found for this region.
             </p>
           </div>
         )}
 
         <div className="mt-16 p-6 bg-muted/30 rounded-xl">
           <h2 className="text-2xl font-semibold mb-4 font-heading">
-            Sobre os Mercados Africanos
+            About African Markets
           </h2>
           <div className="text-muted-foreground space-y-3">
             <p>
-              A África possui um ecossistema de mercados de capitais em rápido crescimento, com mais
-              de 20 bolsas de valores ativas em todo o continente. Esses mercados oferecem acesso a
-              diversos setores, incluindo tecnologia, mineração, telecomunicações, serviços
-              financeiros e energia renovável.
+              Africa has a rapidly growing capital markets ecosystem with 30 active stock exchanges
+              across the continent. These markets provide access to diverse sectors including technology,
+              mining, telecommunications, financial services, and renewable energy.
             </p>
             <p>
-              Os principais mercados como JSE (África do Sul), NGX (Nigéria), EGX (Egito) e NSE
-              (Quênia) lideram em capitalização de mercado e liquidez, enquanto mercados emergentes
-              oferecem oportunidades únicas de crescimento.
+              Leading markets such as JSE (South Africa), NGX (Nigeria), EGX (Egypt), and Casablanca
+              Stock Exchange (Morocco) dominate in market capitalization and liquidity, with a combined
+              market cap exceeding $1.2 trillion. The newest addition is the Ethiopian Securities Exchange
+              (ESX), which began trading in January 2025.
+            </p>
+            <p>
+              Regional exchanges like BRVM serve 8 West African countries, while emerging markets offer
+              unique growth opportunities. Africa is home to 6 of the world's 10 fastest-growing economies,
+              making it an attractive destination for global investors.
             </p>
           </div>
         </div>
