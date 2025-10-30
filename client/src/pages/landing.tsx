@@ -10,6 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
+import logoImage from "@assets/Gemini_Generated_Image_500ej500ej500ej5_1761847609881.png";
 import { memo, useRef, useEffect } from "react";
 
 const BackgroundVideo = memo(() => {
@@ -65,13 +66,11 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">
-              <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
-                <div className="absolute inset-0 rounded-xl bg-primary/20 blur-sm"></div>
-                <div className="relative flex items-center justify-center">
-                  <Globe className="h-5 w-5 text-primary-foreground absolute opacity-40" />
-                  <TrendingUp className="h-4 w-4 text-primary-foreground relative translate-x-0.5 translate-y-0.5" />
-                </div>
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Panafrica Invest Logo" 
+                className="h-10 w-10 transition-transform group-hover:scale-105"
+              />
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-lg leading-none">Panafrica Invest</span>
                 <span className="text-[10px] text-muted-foreground font-medium">Powered by AI</span>
