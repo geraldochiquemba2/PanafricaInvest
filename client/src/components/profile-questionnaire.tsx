@@ -28,6 +28,21 @@ const countries = [
   "🇹🇿 Tanzania",
   "🇪🇹 Ethiopia",
   "🇲🇦 Morocco",
+  "🇦🇴 Angola",
+  "🇷🇼 Rwanda",
+  "🇺🇬 Uganda",
+  "🇧🇼 Botswana",
+  "🇲🇺 Mauritius",
+  "🇹🇳 Tunisia",
+  "🇿🇼 Zimbabwe",
+  "🇲🇿 Mozambique",
+  "🇸🇳 Senegal",
+  "🇨🇲 Cameroon",
+  "🇨🇮 Côte d'Ivoire",
+  "🇿🇲 Zambia",
+  "🇳🇦 Namibia",
+  "🇲🇼 Malawi",
+  "🇩🇿 Algeria",
 ];
 
 export function ProfileQuestionnaire() {
@@ -252,14 +267,14 @@ export function ProfileQuestionnaire() {
             {step === 4 && (
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Select countries you're interested in investing (minimum 2)
+                  Select countries you're interested in investing (select as many as you want)
                 </p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-h-96 overflow-y-auto pr-2">
                   {countries.map((country) => (
                     <div
                       key={country}
                       onClick={() => toggleCountry(country)}
-                      className={`p-4 rounded-lg border cursor-pointer hover-elevate ${
+                      className={`p-3 rounded-lg border cursor-pointer hover-elevate transition-all ${
                         selectedCountries.includes(country)
                           ? "border-primary bg-primary/5"
                           : "border-border"
@@ -267,8 +282,8 @@ export function ProfileQuestionnaire() {
                       data-testid={`country-${country.split(" ")[1].toLowerCase()}`}
                     >
                       <div className="text-center">
-                        <div className="text-3xl mb-2">{country.split(" ")[0]}</div>
-                        <div className="text-sm font-medium">{country.split(" ")[1]}</div>
+                        <div className="text-2xl mb-1">{country.split(" ")[0]}</div>
+                        <div className="text-xs font-medium">{country.split(" ")[1]}</div>
                       </div>
                     </div>
                   ))}
