@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useLocation } from "wouter";
 
 interface ReinvestmentAlertProps {
   assetName: string;
@@ -26,6 +27,7 @@ export function ReinvestmentAlert({
   suggestedFlag,
 }: ReinvestmentAlertProps) {
   const [dismissed, setDismissed] = useState(false);
+  const [, setLocation] = useLocation();
 
   if (dismissed) return null;
 
@@ -107,11 +109,19 @@ export function ReinvestmentAlert({
           </div>
 
           <div className="flex space-x-3">
-            <Button className="flex-1" data-testid="button-view-recommendation">
+            <Button 
+              className="flex-1" 
+              onClick={() => setLocation("/recommendations")}
+              data-testid="button-view-recommendation"
+            >
               View Full Recommendation
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button variant="outline" data-testid="button-maybe-later">
+            <Button 
+              variant="outline" 
+              onClick={() => setDismissed(true)}
+              data-testid="button-maybe-later"
+            >
               Maybe Later
             </Button>
           </div>
