@@ -14,22 +14,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Invalid input", details: result.error });
       }
 
-      const { username, password } = result.data;
+      const { email, username, password } = result.data;
 
-      const existingUser = await storage.getUserByUsername(username);
+      const existingUser = await storage.getUserByEmail(email);
       if (existingUser) {
-        return res.status(400).json({ error: "Username already exists" });
+        return res.status(400).json({ error: "Email already exists" });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await storage.createUser({
+        email,
         username,
         password: hashedPassword,
       });
 
       req.session.userId = user.id;
       res.json({ 
-        id: user.id, 
+        id: user.id,
+        email: user.email,
         username: user.username,
         balance: user.balance 
       });
@@ -42,14 +44,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth: Login
   app.post("/api/login", async (req, res) => {
     try {
-      const result = insertUserSchema.safeParse(req.body);
-      if (!result.success) {
-        return res.status(400).json({ error: "Invalid input", details: result.error });
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
       }
 
-      const { username, password } = result.data;
-
-      const user = await storage.getUserByUsername(username);
+      const user = await storage.getUserByEmail(email);
       if (!user) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
@@ -61,7 +62,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       req.session.userId = user.id;
       res.json({ 
-        id: user.id, 
+        id: user.id,
+        email: user.email,
         username: user.username,
         balance: user.balance 
       });
@@ -94,7 +96,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     res.json({ 
-      id: user.id, 
+      id: user.id,
+      email: user.email,
       username: user.username,
       balance: user.balance 
     });

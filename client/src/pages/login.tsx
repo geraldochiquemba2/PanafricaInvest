@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 
 const loginSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -26,7 +26,7 @@ export default function Login() {
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -88,15 +88,16 @@ export default function Login() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Enter your username" 
+                        type="email"
+                        placeholder="Enter your email" 
                         {...field} 
-                        data-testid="input-username"
+                        data-testid="input-email"
                       />
                     </FormControl>
                     <FormMessage />
