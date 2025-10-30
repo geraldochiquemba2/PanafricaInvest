@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 import stockImage from "@assets/stock_images/african_stock_market_225ff9c0.jpg";
 import bondImage from "@assets/stock_images/african_business_sky_03b949f0.jpg";
 import rwaImage from "@assets/stock_images/african_renewable_en_1ac0cdc7.jpg";
@@ -33,6 +34,7 @@ export function RecommendationCard({
   price,
 }: RecommendationProps) {
   const [showReasoning, setShowReasoning] = useState(false);
+  const [, setLocation] = useLocation();
 
   const riskColor = {
     Low: "text-green-600 dark:text-green-500",
@@ -124,7 +126,11 @@ export function RecommendationCard({
       </CardContent>
 
       <CardFooter className="p-6 pt-0 relative z-10">
-        <Button className="w-full" data-testid={`button-invest-${ticker}`}>
+        <Button 
+          className="w-full" 
+          onClick={() => setLocation("/reinvest")}
+          data-testid={`button-invest-${ticker}`}
+        >
           View Investment Guide
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
