@@ -75,7 +75,7 @@ export function FeatureCards() {
                 data-testid={`feature-card-${idx}`}
               >
                 <div 
-                  className="absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-20"
+                  className="absolute inset-0 bg-cover bg-center opacity-60 dark:opacity-50"
                   style={{ backgroundImage: `url(${feature.image})` }}
                 />
                 <CardContent className="p-0 relative z-10">
