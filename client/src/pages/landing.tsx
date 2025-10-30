@@ -10,7 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
-import logoImage from "@assets/Gemini_Generated_Image_500ej500ej500ej5_1761847609881.png";
+import africaMapImage from "@assets/stock_images/africa_continent_map_2c91b488.jpg";
 import { memo, useRef, useEffect } from "react";
 
 const BackgroundVideo = memo(() => {
@@ -67,9 +67,9 @@ export default function Landing() {
           <Link href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">
               <img 
-                src={logoImage} 
-                alt="Panafrica Invest Logo" 
-                className="h-10 w-10 transition-transform group-hover:scale-105"
+                src={africaMapImage} 
+                alt="Africa Continent" 
+                className="h-10 w-10 object-contain transition-transform group-hover:scale-105"
               />
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-lg leading-none">Panafrica Invest</span>
