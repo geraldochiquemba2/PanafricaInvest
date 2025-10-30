@@ -11,15 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Check RENDER_APP_URL Secret
+        run: |
+          if [ -z "${{ secrets.RENDER_APP_URL }}" ]; then
+            echo "❌ ERRO: Secret RENDER_APP_URL não está configurado!"
+            echo ""
+            echo "📋 Como configurar:"
+            echo "1. Vá para: Settings → Secrets and variables → Actions"
+            echo "2. Clique em 'New repository secret'"
+            echo "3. Name: RENDER_APP_URL"
+            echo "4. Secret: sua URL do Render (ex: https://seu-app.onrender.com)"
+            echo ""
+            exit 1
+          fi
+          echo "✅ Secret RENDER_APP_URL configurado"
+      
       - name: Ping Health Endpoint
         run: |
-          echo "Pinging health endpoint..."
+          echo "Pinging health endpoint: ${{ secrets.RENDER_APP_URL }}/health"
           response=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.RENDER_APP_URL }}/health)
           
           if [ $response -eq 200 ]; then
             echo "✅ Health check successful (HTTP $response)"
           else
             echo "⚠️ Health check returned HTTP $response"
+            echo "Verifique se sua aplicação está rodando no Render!"
             exit 1
           fi
       
