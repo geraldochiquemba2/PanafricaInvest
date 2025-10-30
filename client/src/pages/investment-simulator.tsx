@@ -5,8 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
-import { Calculator, TrendingUp, AlertCircle, CheckCircle, ExternalLink, Loader2 } from "lucide-react";
+import { Calculator, TrendingUp, AlertCircle, CheckCircle, ExternalLink, Loader2, ArrowLeft } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useLocation } from "wouter";
 
 interface MarketAnalysis {
   country: string;
@@ -23,6 +24,7 @@ interface MarketAnalysis {
 }
 
 export default function InvestmentSimulator() {
+  const [, setLocation] = useLocation();
   const [currentAmount, setCurrentAmount] = useState<string>("1000");
   const [targetAmount, setTargetAmount] = useState<string>("10000");
   const [timeHorizon, setTimeHorizon] = useState<number[]>([5]);
@@ -92,6 +94,15 @@ export default function InvestmentSimulator() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto py-8 px-4 max-w-7xl">
         <div className="mb-8">
+          <Button
+            variant="outline"
+            onClick={() => setLocation("/")}
+            className="mb-6"
+            data-testid="button-back-home"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Button>
           <h1 className="text-3xl font-bold mb-2">Investment Goal Simulator</h1>
           <p className="text-muted-foreground">
             Discover the best African markets to reach your financial goals
