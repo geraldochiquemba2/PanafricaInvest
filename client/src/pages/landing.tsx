@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/hero-section";
 import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard";
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
-import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { Link } from "wouter";
 import { ArrowRight, LogOut, TrendingUp, Globe } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
@@ -58,26 +57,6 @@ export default function Landing() {
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <Link href="/dashboard" className="hover:text-primary transition-colors cursor-pointer">
-              Markets
-            </Link>
-            <a href="#features" className="hover:text-primary transition-colors cursor-pointer">
-              Features
-            </a>
-            <a href="#how-it-works" className="hover:text-primary transition-colors cursor-pointer">
-              How It Works
-            </a>
-            <a
-              href="https://hedera.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors cursor-pointer"
-            >
-              Hedera Network
-            </a>
-          </nav>
-
           <div className="flex items-center space-x-3">
             {isAuthenticated && user ? (
               <>
@@ -108,7 +87,6 @@ export default function Landing() {
                 </Link>
               </>
             )}
-            <WalletConnectButton />
           </div>
         </div>
       </header>

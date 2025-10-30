@@ -1,6 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { PortfolioSummary } from "@/components/portfolio-summary";
 import { PerformanceChart } from "@/components/performance-chart";
 import { AssetTable } from "@/components/asset-table";
@@ -71,7 +70,6 @@ export default function Dashboard() {
               >
                 <LogOut className="h-4 w-4" />
               </Button>
-              <WalletConnectButton />
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">

@@ -1,7 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { ReinvestmentAlert } from "@/components/reinvestment-alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -62,7 +60,6 @@ export default function Reinvest() {
                   <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
                 </>
               )}
-              <ThemeToggle />
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -71,7 +68,6 @@ export default function Reinvest() {
               >
                 <LogOut className="h-4 w-4" />
               </Button>
-              <WalletConnectButton />
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">

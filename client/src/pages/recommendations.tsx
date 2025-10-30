@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { RecommendationCard } from "@/components/recommendation-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -186,7 +184,6 @@ export default function Recommendations() {
                   <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
                 </>
               )}
-              <ThemeToggle />
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -195,7 +192,6 @@ export default function Recommendations() {
               >
                 <LogOut className="h-4 w-4" />
               </Button>
-              <WalletConnectButton />
             </div>
           </header>
           <main className="flex-1 overflow-auto p-6">
