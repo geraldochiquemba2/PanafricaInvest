@@ -142,7 +142,7 @@ export function TopPerformersScoreboard() {
         <div className="mt-8 text-center">
           <Link href="/markets">
             <Button variant="outline" size="lg" data-testid="button-view-all-markets">
-              Ver Todos os Mercados Africanos
+              View All African Markets
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
