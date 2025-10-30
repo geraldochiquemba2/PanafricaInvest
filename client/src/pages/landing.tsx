@@ -11,6 +11,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
 import africaMapImage from "@assets/africa_map.png";
+import goalImage from "@assets/stock_images/financial_goals_targ_43b90333.jpg";
+import analysisImage from "@assets/stock_images/ai_data_analysis_cha_b8d02db4.jpg";
+import marketsImage from "@assets/stock_images/global_markets_world_182bfbc9.jpg";
 import { memo, useRef, useEffect } from "react";
 
 const BackgroundVideo = memo(() => {
@@ -136,20 +139,41 @@ export default function Landing() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-10">
-              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
-                <Target className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-2">Set Your Goal</h3>
-                <p className="text-sm text-muted-foreground">Enter your current amount and target</p>
+              <div className="text-center p-6 rounded-lg border overflow-hidden relative group">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${goalImage})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/90" />
+                <div className="relative z-10">
+                  <Target className="h-10 w-10 text-primary mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Set Your Goal</h3>
+                  <p className="text-sm text-muted-foreground">Enter your current amount and target</p>
+                </div>
               </div>
-              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
-                <TrendingUp className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-2">AI Analysis</h3>
-                <p className="text-sm text-muted-foreground">Get market recommendations with real data</p>
+              <div className="text-center p-6 rounded-lg border overflow-hidden relative group">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${analysisImage})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/90" />
+                <div className="relative z-10">
+                  <TrendingUp className="h-10 w-10 text-primary mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">AI Analysis</h3>
+                  <p className="text-sm text-muted-foreground">Get market recommendations with real data</p>
+                </div>
               </div>
-              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
-                <Globe className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-2">Explore Markets</h3>
-                <p className="text-sm text-muted-foreground">Access real resources for each country</p>
+              <div className="text-center p-6 rounded-lg border overflow-hidden relative group">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${marketsImage})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/90" />
+                <div className="relative z-10">
+                  <Globe className="h-10 w-10 text-primary mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Explore Markets</h3>
+                  <p className="text-sm text-muted-foreground">Access real resources for each country</p>
+                </div>
               </div>
             </div>
 
