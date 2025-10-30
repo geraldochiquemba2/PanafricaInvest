@@ -10,7 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
-import africaMapImage from "@assets/stock_images/africa_continent_map_2c91b488.jpg";
+import africaMapImage from "@assets/africa_map.png";
 import { memo, useRef, useEffect } from "react";
 
 const BackgroundVideo = memo(() => {
