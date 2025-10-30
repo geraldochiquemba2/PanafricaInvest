@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/hero-section";
 import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard";
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { Link } from "wouter";
 import { ArrowRight, LogOut, TrendingUp, Globe } from "lucide-react";
@@ -80,7 +79,6 @@ export default function Landing() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            <ThemeToggle />
             {isAuthenticated && user ? (
               <>
                 <Badge variant="secondary" className="text-sm" data-testid="text-user-balance">
