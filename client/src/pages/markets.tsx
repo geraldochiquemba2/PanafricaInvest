@@ -6,6 +6,31 @@ import { Link } from "wouter";
 import { ArrowLeft, ExternalLink, TrendingUp } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+import southAfricaImg from "@assets/stock_images/johannesburg_south_a_ae35c80f.jpg";
+import nigeriaImg from "@assets/stock_images/lagos_nigeria_city_s_3e9f7966.jpg";
+import egyptImg from "@assets/stock_images/cairo_egypt_pyramids_2b84e9d0.jpg";
+import moroccoImg from "@assets/stock_images/casablanca_morocco_h_a40b92f4.jpg";
+import kenyaImg from "@assets/stock_images/nairobi_kenya_city_s_f29fc035.jpg";
+import ghanaImg from "@assets/stock_images/accra_ghana_city_sky_a60eb02c.jpg";
+import botswanaImg from "@assets/stock_images/gaborone_botswana_ci_f0575d20.jpg";
+import mauritiusImg from "@assets/stock_images/port_louis_mauritius_d65163d4.jpg";
+import tunisiaImg from "@assets/stock_images/tunis_tunisia_citysc_f43d8521.jpg";
+import zimbabweImg from "@assets/stock_images/harare_zimbabwe_city_f5eb57af.jpg";
+import tanzaniaImg from "@assets/stock_images/dar_es_salaam_tanzan_b4bb7301.jpg";
+import ugandaImg from "@assets/stock_images/kampala_uganda_city__741a802f.jpg";
+import namibiaImg from "@assets/stock_images/windhoek_namibia_cit_7b4d48a6.jpg";
+import rwandaImg from "@assets/stock_images/kigali_rwanda_city_m_9efc59fb.jpg";
+import zambiaImg from "@assets/stock_images/lusaka_zambia_city_l_7706d98d.jpg";
+import malawiImg from "@assets/stock_images/blantyre_malawi_city_b9d183d5.jpg";
+import ethiopiaImg from "@assets/stock_images/addis_ababa_ethiopia_563229bd.jpg";
+import algeriaImg from "@assets/stock_images/algiers_algeria_whit_108ea9f8.jpg";
+import angolaImg from "@assets/stock_images/luanda_angola_bay_wa_49b7b25a.jpg";
+import mozambiqueImg from "@assets/stock_images/maputo_mozambique_ci_807fbacc.jpg";
+import eswatiniImg from "@assets/stock_images/mbabane_eswatini_swa_328c1e13.jpg";
+import cameroonImg from "@assets/stock_images/douala_cameroon_city_5ca8d22c.jpg";
+import ivoryCoastImg from "@assets/stock_images/abidjan_ivory_coast__326aa3d8.jpg";
+import defaultImg from "@assets/stock_images/african_stock_exchan_73bd73fe.jpg";
+
 interface AfricanMarket {
   country: string;
   flag: string;
@@ -17,6 +42,33 @@ interface AfricanMarket {
   marketCap?: string;
   founded?: string;
 }
+
+const countryImages: Record<string, string> = {
+  "South Africa": southAfricaImg,
+  "Nigeria": nigeriaImg,
+  "Egypt": egyptImg,
+  "Morocco": moroccoImg,
+  "Kenya": kenyaImg,
+  "Ghana": ghanaImg,
+  "Botswana": botswanaImg,
+  "Mauritius": mauritiusImg,
+  "Tunisia": tunisiaImg,
+  "Zimbabwe": zimbabweImg,
+  "Tanzania": tanzaniaImg,
+  "Uganda": ugandaImg,
+  "Namibia": namibiaImg,
+  "Rwanda": rwandaImg,
+  "Zambia": zambiaImg,
+  "Malawi": malawiImg,
+  "Ethiopia": ethiopiaImg,
+  "Algeria": algeriaImg,
+  "Angola": angolaImg,
+  "Mozambique": mozambiqueImg,
+  "Eswatini": eswatiniImg,
+  "Cameroon": cameroonImg,
+  "Côte d'Ivoire": ivoryCoastImg,
+  "Gabon": cameroonImg,
+};
 
 const africanMarkets: AfricanMarket[] = [
   {
@@ -359,74 +411,84 @@ export default function Markets() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredMarkets.map((market) => (
-            <Card
-              key={market.country}
-              className="hover-elevate transition-all"
-              data-testid={`card-market-${market.country.toLowerCase().replace(" ", "-")}`}
-            >
-              <CardHeader>
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3 flex-1">
-                    <span className="text-5xl" aria-label={`${market.country} flag`}>
-                      {market.flag}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <CardTitle className="text-xl mb-1">{market.country}</CardTitle>
-                      <Badge variant="secondary" className="text-xs">
-                        {market.exchangeCode}
+          {filteredMarkets.map((market) => {
+            const backgroundImage = countryImages[market.country] || defaultImg;
+            return (
+              <Card
+                key={market.country}
+                className="hover-elevate transition-all overflow-hidden relative"
+                data-testid={`card-market-${market.country.toLowerCase().replace(" ", "-")}`}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${backgroundImage})` }}
+                />
+                <div className="absolute inset-0 bg-background/90 dark:bg-background/85" />
+                <div className="relative z-10">
+                  <CardHeader>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3 flex-1">
+                        <span className="text-5xl" aria-label={`${market.country} flag`}>
+                          {market.flag}
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <CardTitle className="text-xl mb-1">{market.country}</CardTitle>
+                          <Badge variant="secondary" className="text-xs">
+                            {market.exchangeCode}
+                          </Badge>
+                        </div>
+                      </div>
+                      {market.active && (
+                        <Badge variant="outline" className="text-green-600 border-green-600 dark:text-green-500 dark:border-green-500">
+                          <TrendingUp className="h-3 w-3 mr-1" />
+                          Active
+                        </Badge>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <div className="text-sm font-medium mb-1">Stock Exchange</div>
+                      <div className="text-sm text-muted-foreground">{market.exchange}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium mb-1">Region</div>
+                      <Badge variant="outline" className="text-xs">
+                        {market.region}
                       </Badge>
                     </div>
-                  </div>
-                  {market.active && (
-                    <Badge variant="outline" className="text-green-600 border-green-600 dark:text-green-500 dark:border-green-500">
-                      <TrendingUp className="h-3 w-3 mr-1" />
-                      Active
-                    </Badge>
-                  )}
+                    {market.marketCap && (
+                      <div>
+                        <div className="text-sm font-medium mb-1">Market Cap</div>
+                        <div className="text-sm font-mono text-muted-foreground">{market.marketCap}</div>
+                      </div>
+                    )}
+                    {market.founded && (
+                      <div>
+                        <div className="text-sm font-medium mb-1">Founded</div>
+                        <div className="text-sm text-muted-foreground">{market.founded}</div>
+                      </div>
+                    )}
+                    <a
+                      href={market.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        data-testid={`button-visit-${market.country.toLowerCase().replace(" ", "-")}`}
+                      >
+                        Visit Official Website
+                        <ExternalLink className="h-4 w-4 ml-2" />
+                      </Button>
+                    </a>
+                  </CardContent>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="text-sm font-medium mb-1">Stock Exchange</div>
-                  <div className="text-sm text-muted-foreground">{market.exchange}</div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium mb-1">Region</div>
-                  <Badge variant="outline" className="text-xs">
-                    {market.region}
-                  </Badge>
-                </div>
-                {market.marketCap && (
-                  <div>
-                    <div className="text-sm font-medium mb-1">Market Cap</div>
-                    <div className="text-sm font-mono text-muted-foreground">{market.marketCap}</div>
-                  </div>
-                )}
-                {market.founded && (
-                  <div>
-                    <div className="text-sm font-medium mb-1">Founded</div>
-                    <div className="text-sm text-muted-foreground">{market.founded}</div>
-                  </div>
-                )}
-                <a
-                  href={market.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    data-testid={`button-visit-${market.country.toLowerCase().replace(" ", "-")}`}
-                  >
-                    Visit Official Website
-                    <ExternalLink className="h-4 w-4 ml-2" />
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
 
         {filteredMarkets.length === 0 && (
