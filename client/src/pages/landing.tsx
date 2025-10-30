@@ -40,7 +40,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/20 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">
