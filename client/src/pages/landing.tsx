@@ -3,7 +3,7 @@ import { TopPerformersScoreboard } from "@/components/top-performers-scoreboard"
 import { FeatureCards } from "@/components/feature-cards";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard } from "lucide-react";
+import { ArrowRight, LogOut, TrendingUp, Globe, LayoutDashboard, Calculator, Target } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -123,6 +123,49 @@ export default function Landing() {
         <HeroSection />
         <TopPerformersScoreboard />
         <FeatureCards />
+
+        <div className="py-20 px-6 bg-gradient-to-br from-primary/10 via-background to-primary/5">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center justify-center p-3 rounded-full bg-primary/10 mb-6">
+                <Calculator className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-4xl font-bold mb-4 font-heading">Investment Goal Simulator</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+                Plan your financial future with AI-powered market analysis. See which African markets can help you reach your goals.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
+                <Target className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">Set Your Goal</h3>
+                <p className="text-sm text-muted-foreground">Enter your current amount and target</p>
+              </div>
+              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
+                <TrendingUp className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">AI Analysis</h3>
+                <p className="text-sm text-muted-foreground">Get market recommendations with real data</p>
+              </div>
+              <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border">
+                <Globe className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">Explore Markets</h3>
+                <p className="text-sm text-muted-foreground">Access real resources for each country</p>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link href="/simulator">
+                <Button size="lg" className="h-14 px-10 rounded-full" data-testid="button-try-simulator">
+                  <Calculator className="mr-2 h-5 w-5" />
+                  Try the Simulator
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <p className="text-xs text-muted-foreground mt-4">No registration required</p>
+            </div>
+          </div>
+        </div>
 
         <div id="how-it-works" className="py-24 px-6 bg-muted/30 relative overflow-hidden">
           <BackgroundVideo />
