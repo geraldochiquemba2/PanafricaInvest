@@ -1,6 +1,8 @@
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import marketBgImage from "@assets/stock_images/african_stock_market_0b5d5e41.jpg";
 
 interface PerformerData {
@@ -129,6 +131,15 @@ export function TopPerformersScoreboard() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link href="/markets">
+            <Button variant="outline" size="lg" data-testid="button-view-all-markets">
+              Ver Todos os Mercados Africanos
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

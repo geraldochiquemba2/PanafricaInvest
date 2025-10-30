@@ -13,6 +13,7 @@ import Questionnaire from "@/pages/questionnaire";
 import Reinvest from "@/pages/reinvest";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
+import Markets from "@/pages/markets";
 import { useEffect } from "react";
 
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/questionnaire" component={Questionnaire} />
+      <Route path="/markets" component={Markets} />
       <Route path="/dashboard">
         {() => <ProtectedRoute component={Dashboard} />}
       </Route>
