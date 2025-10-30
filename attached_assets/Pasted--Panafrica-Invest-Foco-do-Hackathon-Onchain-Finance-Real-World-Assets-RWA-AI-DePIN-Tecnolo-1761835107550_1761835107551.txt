@@ -1,0 +1,54 @@
+: Panafrica Invest
+Foco do Hackathon: Onchain Finance & Real-World Assets (RWA) / AI & DePIN
+Tecnologia Principal: Rede Hedera Hashgraph (para transações rápidas, baratas e seguras/tokenização) e Inteligência Artificial (para análise de perfil e recomendação).
+Objetivo Geral
+Desenvolver uma Plataforma de Investimento Digital Pan-Africana (dApp) que conecta investidores de todo o mundo às melhores oportunidades de investimento (ações, títulos, RWA - Real World Assets/Ativos do Mundo Real) em todos os países africanos. O sistema deve utilizar Inteligência Artificial (IA) para fornecer recomendações de investimento personalizadas, rastrear o desempenho em tempo real e guiar os investidores para uma nova rodada de investimento.
+
+Funcionalidades Essenciais (Must-Haves)
+1. Integração e Agregação de Dados Pan-Africanos
+Painel Centralizado: Criar uma interface que agrega dados financeiros (Bolsas de Valores, títulos públicos, oportunidades de RWA como terras agrícolas tokenizadas ou projetos de infraestrutura) de múltiplos países africanos.
+
+Ranking de Ações/Ativos: Exibir um "Top Performers Scoreboard" que mostra as ações/ativos com melhor desempenho (ou mais promissores em termos de impacto) de cada país, com base em critérios verificáveis (potencial de crescimento, dividendos, impacto social, etc.).
+
+Tokenização (Usando Hedera Token Service - HTS): Implementar um mecanismo para tokenizar Real-World Assets (RWA) e/ou representações de participações em empresas ou projetos, permitindo a compra fracionada por investidores internacionais/domésticos na Hedera.
+
+2. Motor de Recomendação com Inteligência Artificial (IA)
+Criação de Perfil do Usuário: O usuário deve responder a um questionário detalhado (tolerância ao risco, objetivos financeiros, horizonte de investimento, setores de interesse e país de origem).
+
+Algoritmo de Recomendação (IA): A IA deve analisar o perfil do usuário e os dados em tempo real da plataforma para gerar recomendações de investimento personalizadas.
+
+Exemplo: Para um usuário de "baixo risco" com interesse em "energia renovável", a IA recomenda títulos verdes tokenizados do Quénia e uma participação fracionada (RWA) em um projeto solar na Nigéria.
+
+Instruções de Compra: O sistema deve fornecer um guia passo a passo e links diretos/integrações (usando a DLT da Hedera para a transação final) sobre como, onde e quando comprar os ativos recomendados.
+
+3. Acompanhamento em Tempo Real e Cadeia de Reinvestimento
+Rastreamento do Investimento (Hedera Consensus Service - HCS): Utilizar o HCS para fornecer acompanhamento em tempo real, imutável e transparente do desempenho do portfólio do usuário. Todas as atualizações de valorização, dividendos ou marco do RWA devem ser registadas no Hashgraph.
+
+"Cadeia de Investimento" (Loop de Reinjeção): Uma vez que um ativo atinja um marco de lucro ou um objetivo predefinido pelo usuário, o app deve:
+
+Notificar o usuário.
+
+Utilizar a IA para sugerir um novo portfólio de reinvestimento (a "próxima cadeia"), focando em diversificação, impacto ou maior retorno, mantendo-se fiel ao perfil do usuário.
+
+A transação de reinvestimento deve ser facilitada diretamente na plataforma (com liquidação na Hedera).
+
+Requisitos Técnicos (Para o Hackathon)
+Utilização da Hedera:
+
+Hedera Token Service (HTS): Para tokenizar RWA, ações representativas ou criar tokens de portfólio.
+
+Hedera Consensus Service (HCS): Para carimbar o tempo das transações, rastrear o desempenho do portfólio e garantir a transparência dos dados.
+
+Smart Contracts (EVM-compatible): Para automatizar a lógica de reinvestimento e o pagamento de dividendos/rendimentos.
+
+Tecnologia de IA: Integração com um modelo de Machine Learning (ML) para o motor de recomendação e análise de risco.
+
+Demonstração (MVP - Minimum Viable Product): O projeto deve demonstrar a capacidade de:
+
+Registar um perfil de utilizador.
+
+Receber uma recomendação de investimento personalizada.
+
+Simular a compra de um ativo tokenizado na Hedera.
+
+Mostrar um dashboard de desempenho (rastreado via HCS).
