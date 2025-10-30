@@ -154,3 +154,91 @@ Return ONLY valid JSON with this structure:
     throw new Error("Failed to generate reinvestment suggestion");
   }
 }
+
+export interface MarketAnalysis {
+  country: string;
+  requiredAnnualReturn: string;
+  feasibility: "High" | "Medium" | "Low";
+  topSectors: string[];
+  advantages: string[];
+  disadvantages: string[];
+  economicLinks: {
+    name: string;
+    url: string;
+  }[];
+  investmentStrategy: string;
+}
+
+export async function generateMarketAnalysis(
+  currentAmount: number,
+  targetAmount: number,
+  timeHorizon: number
+): Promise<MarketAnalysis[]> {
+  const requiredReturn = ((Math.pow(targetAmount / currentAmount, 1 / timeHorizon) - 1) * 100).toFixed(2);
+
+  const prompt = `You are an expert on African financial markets and economies. An investor wants to grow $${currentAmount} to $${targetAmount} in ${timeHorizon} years, requiring ${requiredReturn}% annual returns.
+
+Analyze and recommend the TOP 5 African countries/markets that could realistically achieve this goal. For each country, provide:
+
+1. Country name
+2. Required annual return (${requiredReturn}%)
+3. Feasibility level (High/Medium/Low) based on market potential
+4. Top 3-4 investment sectors in that country
+5. 3-4 key advantages of investing in this market
+6. 3-4 key disadvantages or risks
+7. 3-4 real, functional URLs to explore the economy:
+   - Central bank website
+   - Stock exchange website
+   - Investment authority or economic statistics portal
+   - World Bank or IMF country data page
+8. A brief investment strategy (2-3 sentences) for this market
+
+Focus on realistic, current information. Provide REAL, WORKING URLs to official sources like central banks, stock exchanges, government investment portals, World Bank, IMF, African Development Bank pages.
+
+Return ONLY valid JSON array with this structure:
+[
+  {
+    "country": "string",
+    "requiredAnnualReturn": "${requiredReturn}%",
+    "feasibility": "High" | "Medium" | "Low",
+    "topSectors": ["sector1", "sector2", "sector3"],
+    "advantages": ["advantage1", "advantage2", "advantage3"],
+    "disadvantages": ["disadvantage1", "disadvantage2", "disadvantage3"],
+    "economicLinks": [
+      {"name": "Central Bank", "url": "https://..."},
+      {"name": "Stock Exchange", "url": "https://..."},
+      {"name": "Investment Portal", "url": "https://..."}
+    ],
+    "investmentStrategy": "string"
+  }
+]`;
+
+  try {
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an African markets expert. Always respond with valid JSON only, no additional text. Use real, functional URLs from official sources.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 4000,
+    });
+
+    const content = completion.choices[0]?.message?.content || "[]";
+    const jsonMatch = content.match(/\[[\s\S]*\]/);
+    const jsonStr = jsonMatch ? jsonMatch[0] : content;
+
+    const analysis = JSON.parse(jsonStr);
+    return analysis;
+  } catch (error) {
+    console.error("Error generating market analysis:", error);
+    throw new Error("Failed to generate market analysis");
+  }
+}

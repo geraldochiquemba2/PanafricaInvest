@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import bcrypt from "bcryptjs";
 import { storage } from "./storage";
-import { generateRecommendations, generateReinvestmentSuggestion } from "./groq-service";
+import { generateRecommendations, generateReinvestmentSuggestion, generateMarketAnalysis } from "./groq-service";
 import { insertUserSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -128,6 +128,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error generating reinvestment suggestion:", error);
       res.status(500).json({ error: "Failed to generate reinvestment suggestion" });
+    }
+  });
+
+  // Generate investment market analysis
+  app.post("/api/simulate-investment", async (req, res) => {
+    try {
+      const { currentAmount, targetAmount, timeHorizon } = req.body;
+      
+      if (!currentAmount || !targetAmount || !timeHorizon) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const analysis = await generateMarketAnalysis(
+        currentAmount,
+        targetAmount,
+        timeHorizon
+      );
+      res.json(analysis);
+    } catch (error) {
+      console.error("Error generating market analysis:", error);
+      res.status(500).json({ error: "Failed to generate market analysis" });
     }
   });
 

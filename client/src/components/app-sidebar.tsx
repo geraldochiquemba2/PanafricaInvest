@@ -3,6 +3,7 @@ import {
   TrendingUp,
   Wallet,
   RefreshCw,
+  Calculator,
 } from "lucide-react";
 import {
   Sidebar,
@@ -22,6 +23,11 @@ const menuItems = [
     title: "Dashboard",
     url: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Simulator",
+    url: "/simulator",
+    icon: Calculator,
   },
   {
     title: "Recommendations",
