@@ -128,9 +128,9 @@ export default function Landing() {
               title="How it works background video"
               frameBorder="0"
               allow="autoplay; encrypted-media"
-              style={{ pointerEvents: 'none', opacity: 0.15 }}
+              style={{ pointerEvents: 'none', opacity: 0.5 }}
             />
-            <div className="absolute inset-0 bg-background/80 dark:bg-background/85" />
+            <div className="absolute inset-0 bg-background/40 dark:bg-background/50" />
           </div>
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
