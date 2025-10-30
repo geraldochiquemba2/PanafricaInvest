@@ -42,27 +42,40 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
   return <Component />;
 }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Landing} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/questionnaire" component={Questionnaire} />
-      <Route path="/markets" component={Markets} />
-      <Route path="/simulator" component={InvestmentSimulator} />
-      <Route path="/dashboard">
-        {() => <ProtectedRoute component={Dashboard} />}
-      </Route>
-      <Route path="/recommendations" component={Recommendations} />
-      <Route path="/reinvest">
-        {() => <ProtectedRoute component={Reinvest} />}
-      </Route>
-      <Route path="/portfolio">
-        {() => <ProtectedRoute component={Dashboard} />}
-      </Route>
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={Landing} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/questionnaire" component={Questionnaire} />
+        <Route path="/markets" component={Markets} />
+        <Route path="/simulator" component={InvestmentSimulator} />
+        <Route path="/dashboard">
+          {() => <ProtectedRoute component={Dashboard} />}
+        </Route>
+        <Route path="/recommendations" component={Recommendations} />
+        <Route path="/reinvest">
+          {() => <ProtectedRoute component={Reinvest} />}
+        </Route>
+        <Route path="/portfolio">
+          {() => <ProtectedRoute component={Dashboard} />}
+        </Route>
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 
