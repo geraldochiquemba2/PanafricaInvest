@@ -4,45 +4,17 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AuthProvider, useAuth } from "@/contexts/auth-context";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
 import Recommendations from "@/pages/recommendations";
 import Questionnaire from "@/pages/questionnaire";
 import Reinvest from "@/pages/reinvest";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
 import Markets from "@/pages/markets";
 import InvestmentSimulator from "@/pages/investment-simulator";
 import News from "@/pages/news";
 import AIChat from "@/pages/ai-chat";
 import { useEffect } from "react";
-
-function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
-  const { isAuthenticated, isLoading } = useAuth();
-  const [, setLocation] = useLocation();
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      setLocation("/login");
-    }
-  }, [isLoading, isAuthenticated, setLocation]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-lg text-muted-foreground">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  return <Component />;
-}
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -60,23 +32,15 @@ function Router() {
       <ScrollToTop />
       <Switch>
         <Route path="/" component={Landing} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
         <Route path="/questionnaire" component={Questionnaire} />
         <Route path="/markets" component={Markets} />
         <Route path="/simulator" component={InvestmentSimulator} />
-        <Route path="/dashboard">
-          {() => <ProtectedRoute component={Dashboard} />}
-        </Route>
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/news" component={News} />
         <Route path="/ask-ai" component={AIChat} />
         <Route path="/recommendations" component={Recommendations} />
-        <Route path="/reinvest">
-          {() => <ProtectedRoute component={Reinvest} />}
-        </Route>
-        <Route path="/portfolio">
-          {() => <ProtectedRoute component={Dashboard} />}
-        </Route>
+        <Route path="/reinvest" component={Reinvest} />
+        <Route path="/portfolio" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
     </>
@@ -87,12 +51,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark">
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
