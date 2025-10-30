@@ -1,5 +1,9 @@
 import { TrendingUp, TrendingDown, DollarSign, PieChart, Globe } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import marketImage from "@assets/stock_images/african_stock_market_225ff9c0.jpg";
+import energyImage from "@assets/stock_images/african_renewable_en_8ec6e2f6.jpg";
+import businessImage from "@assets/stock_images/african_business_sky_e13749de.jpg";
+import infraImage from "@assets/stock_images/african_infrastructu_6733bf42.jpg";
 
 const summaryData = [
   {
@@ -8,6 +12,7 @@ const summaryData = [
     change: "+12.5%",
     positive: true,
     icon: DollarSign,
+    image: marketImage,
   },
   {
     title: "Total Return",
@@ -15,6 +20,7 @@ const summaryData = [
     change: "+12.5%",
     positive: true,
     icon: TrendingUp,
+    image: energyImage,
   },
   {
     title: "Asset Diversity",
@@ -22,6 +28,7 @@ const summaryData = [
     change: "8 Countries",
     positive: true,
     icon: PieChart,
+    image: businessImage,
   },
   {
     title: "Monthly Growth",
@@ -29,6 +36,7 @@ const summaryData = [
     change: "vs. -1.2% last month",
     positive: true,
     icon: Globe,
+    image: infraImage,
   },
 ];
 
@@ -40,18 +48,22 @@ export function PortfolioSummary() {
         return (
           <Card
             key={idx}
-            className="rounded-xl min-h-[140px]"
+            className="rounded-xl min-h-[140px] overflow-hidden relative"
             data-testid={`summary-card-${idx}`}
           >
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <div 
+              className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-5"
+              style={{ backgroundImage: `url(${item.image})` }}
+            />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 {item.title}
               </CardTitle>
-              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-lg bg-primary/20 backdrop-blur-sm flex items-center justify-center">
                 <Icon className="h-4 w-4 text-primary" />
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <div className="text-3xl font-semibold font-mono" data-testid={`value-${idx}`}>
                 {item.value}
               </div>

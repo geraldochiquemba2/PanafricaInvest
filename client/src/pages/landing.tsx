@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
+import howItWorksBg from "@assets/stock_images/african_technology_f_4fd6a397.jpg";
 
 export default function Landing() {
   const { user, isAuthenticated } = useAuth();
@@ -112,8 +113,12 @@ export default function Landing() {
         <TopPerformersScoreboard />
         <FeatureCards />
 
-        <div id="how-it-works" className="py-24 px-6 bg-muted/30">
-          <div className="max-w-7xl mx-auto">
+        <div id="how-it-works" className="py-24 px-6 bg-muted/30 relative">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-5 dark:opacity-[0.03]"
+            style={{ backgroundImage: `url(${howItWorksBg})` }}
+          />
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-semibold mb-4 font-heading">How It Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

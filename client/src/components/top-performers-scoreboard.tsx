@@ -1,6 +1,7 @@
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import marketBgImage from "@assets/stock_images/african_stock_market_0b5d5e41.jpg";
 
 interface PerformerData {
   country: string;
@@ -54,8 +55,12 @@ const mockData: PerformerData[] = [
 
 export function TopPerformersScoreboard() {
   return (
-    <div className="py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="py-16 px-6 relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-5 dark:opacity-[0.03]"
+        style={{ backgroundImage: `url(${marketBgImage})` }}
+      />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-semibold mb-4 font-heading" data-testid="text-scoreboard-title">
             Top Performers Across Africa
@@ -69,7 +74,7 @@ export function TopPerformersScoreboard() {
           {mockData.map((country) => (
             <Card
               key={country.country}
-              className="min-w-[320px] rounded-xl hover-elevate"
+              className="min-w-[320px] rounded-xl hover-elevate backdrop-blur-sm bg-background/95"
               data-testid={`card-country-${country.country.toLowerCase()}`}
             >
               <CardHeader className="pb-3">

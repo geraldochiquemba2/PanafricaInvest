@@ -147,7 +147,9 @@ npm install  # Instala dependências
 
 ## Estado Atual
 ✅ MVP funcional com IA integrada
-✅ Design completo e polido
+✅ Sistema de autenticação completo com saldo inicial de $500
+✅ Design completo e polido com imagens de fundo realistas
 ✅ Navegação fluida com animações
 ✅ Links externos funcionais
 ✅ Simulação de wallet Hedera
+✅ Todos os cards e seções com imagens temáticas

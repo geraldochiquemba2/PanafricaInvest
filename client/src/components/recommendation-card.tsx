@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import stockImage from "@assets/stock_images/african_stock_market_225ff9c0.jpg";
+import bondImage from "@assets/stock_images/african_business_sky_03b949f0.jpg";
+import rwaImage from "@assets/stock_images/african_renewable_en_1ac0cdc7.jpg";
 
 interface RecommendationProps {
   name: string;
@@ -37,9 +40,19 @@ export function RecommendationCard({
     High: "text-red-600 dark:text-red-500",
   };
 
+  const typeImages = {
+    Stock: stockImage,
+    Bond: bondImage,
+    RWA: rwaImage,
+  };
+
   return (
-    <Card className="rounded-xl overflow-hidden hover-elevate" data-testid={`recommendation-${ticker}`}>
-      <CardHeader className="p-6 bg-gradient-to-br from-primary/5 to-primary/10">
+    <Card className="rounded-xl overflow-hidden hover-elevate relative" data-testid={`recommendation-${ticker}`}>
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-5"
+        style={{ backgroundImage: `url(${typeImages[type]})` }}
+      />
+      <CardHeader className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 relative z-10">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center space-x-2 mb-2">
@@ -63,7 +76,7 @@ export function RecommendationCard({
         </div>
       </CardHeader>
 
-      <CardContent className="p-6">
+      <CardContent className="p-6 relative z-10">
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div>
             <div className="text-xs text-muted-foreground mb-1">Expected Return</div>
@@ -110,7 +123,7 @@ export function RecommendationCard({
         </div>
       </CardContent>
 
-      <CardFooter className="p-6 pt-0">
+      <CardFooter className="p-6 pt-0 relative z-10">
         <Button className="w-full" data-testid={`button-invest-${ticker}`}>
           View Investment Guide
           <ArrowRight className="ml-2 h-4 w-4" />
