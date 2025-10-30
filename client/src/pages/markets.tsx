@@ -29,6 +29,13 @@ import mozambiqueImg from "@assets/stock_images/maputo_mozambique_ci_807fbacc.jp
 import eswatiniImg from "@assets/stock_images/mbabane_eswatini_swa_328c1e13.jpg";
 import cameroonImg from "@assets/stock_images/douala_cameroon_city_5ca8d22c.jpg";
 import ivoryCoastImg from "@assets/stock_images/abidjan_ivory_coast__326aa3d8.jpg";
+import sudanImg from "@assets/stock_images/khartoum_sudan_city__55f70819.jpg";
+import capeVerdeImg from "@assets/stock_images/praia_cape_verde_cit_40985192.jpg";
+import seychellesImg from "@assets/stock_images/victoria_seychelles__b53bab38.jpg";
+import libyaImg from "@assets/stock_images/tripoli_libya_city_m_a432c159.jpg";
+import somaliaImg from "@assets/stock_images/mogadishu_somalia_ci_e6114556.jpg";
+import brvmImg from "@assets/stock_images/west_africa_market_b_3dbf94b6.jpg";
+import gabonImg from "@assets/stock_images/libreville_gabon_cit_0165fe4e.jpg";
 import defaultImg from "@assets/stock_images/african_stock_exchan_73bd73fe.jpg";
 
 interface AfricanMarket {
@@ -67,7 +74,13 @@ const countryImages: Record<string, string> = {
   "Eswatini": eswatiniImg,
   "Cameroon": cameroonImg,
   "Côte d'Ivoire": ivoryCoastImg,
-  "Gabon": cameroonImg,
+  "Gabon": gabonImg,
+  "Sudan": sudanImg,
+  "Cape Verde": capeVerdeImg,
+  "Seychelles": seychellesImg,
+  "Libya": libyaImg,
+  "Somalia": somaliaImg,
+  "BRVM Regional": brvmImg,
 };
 
 const africanMarkets: AfricanMarket[] = [
