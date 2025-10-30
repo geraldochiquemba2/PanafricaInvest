@@ -168,6 +168,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Fetch African financial news from GDELT API
+  app.get("/api/news", async (_req, res) => {
+    try {
+      const query = encodeURIComponent('(africa OR african) AND (finance OR economy OR market OR investment OR stock OR GDP OR banking OR currency)');
+      const mode = 'artlist';
+      const maxRecords = 30;
+      const timespan = '7d';
+      
+      const gdeltUrl = `https://api.gdeltproject.org/api/v2/doc/doc?query=${query}&mode=${mode}&maxrecords=${maxRecords}&timespan=${timespan}&format=json&sort=datedesc`;
+      
+      const response = await fetch(gdeltUrl);
+      
+      if (!response.ok) {
+        throw new Error(`GDELT API returned ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      const articles = data.articles?.map((article: any) => ({
+        title: article.title || 'Untitled',
+        url: article.url || '#',
+        source: article.domain || 'Unknown',
+        publishedAt: article.seendate || new Date().toISOString(),
+        language: article.language || 'en',
+        country: article.sourcecountry || 'Unknown',
+        imageUrl: article.socialimage || null,
+      })) || [];
+      
+      res.json({ articles });
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      res.status(500).json({ error: "Failed to fetch news", articles: [] });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

@@ -4,6 +4,7 @@ import {
   Wallet,
   RefreshCw,
   Calculator,
+  Newspaper,
 } from "lucide-react";
 import {
   Sidebar,
@@ -23,6 +24,11 @@ const menuItems = [
     title: "Dashboard",
     url: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "News",
+    url: "/news",
+    icon: Newspaper,
   },
   {
     title: "Simulator",
