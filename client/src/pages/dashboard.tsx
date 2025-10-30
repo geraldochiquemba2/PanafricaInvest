@@ -1,6 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { PortfolioSummary } from "@/components/portfolio-summary";
 import { PerformanceChart } from "@/components/performance-chart";
@@ -64,7 +63,6 @@ export default function Dashboard() {
                   <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
                 </>
               )}
-              <ThemeToggle />
               <Button 
                 variant="ghost" 
                 size="sm" 

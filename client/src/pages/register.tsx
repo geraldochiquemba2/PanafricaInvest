@@ -10,7 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
-import africanAgricultureImage from "@assets/stock_images/african_agriculture__094a56d1.jpg";
 import { DollarSign } from "lucide-react";
 
 const registerSchema = z.object({
@@ -65,11 +64,16 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4">
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${africanAgricultureImage})` }}
-      >
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+      <div className="absolute inset-0">
+        <iframe
+          className="absolute top-1/2 left-1/2 w-[177.77vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+          src="https://www.youtube.com/embed/nZoaZDOe6bg?autoplay=1&mute=1&loop=1&playlist=nZoaZDOe6bg&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&iv_load_policy=3&disablekb=1"
+          title="Register background video"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          style={{ pointerEvents: 'none' }}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70" />
       </div>
 
