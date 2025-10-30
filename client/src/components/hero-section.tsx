@@ -4,7 +4,7 @@ import { Link } from "wouter";
 
 export function HeroSection() {
   return (
-    <div className="relative h-[600px] w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
         <iframe
           className="absolute top-1/2 left-1/2 w-[177.77vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"

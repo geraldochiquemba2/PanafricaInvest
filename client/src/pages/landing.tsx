@@ -113,7 +113,7 @@ export default function Landing() {
         </div>
       </header>
 
-      <main className="pt-16">
+      <main>
         <HeroSection />
         <TopPerformersScoreboard />
         <FeatureCards />
