@@ -6,9 +6,13 @@ import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { RecommendationCard } from "@/components/recommendation-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Loader2, ArrowLeft } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, Loader2, ArrowLeft, LogOut } from "lucide-react";
 import { useLocation } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/contexts/auth-context";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
 
 const recommendations = [
   {
@@ -97,6 +101,31 @@ export default function Recommendations() {
   const [error, setError] = useState("");
   const [recommendations, setRecommendations] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>(null);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("POST", "/api/logout", {});
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out",
+      });
+      setLocation("/");
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Logout failed",
+        description: "Unable to log out. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
   useEffect(() => {
     const loadRecommendations = async () => {
@@ -149,7 +178,23 @@ export default function Recommendations() {
           <header className="flex items-center justify-between p-4 border-b">
             <SidebarTrigger data-testid="button-sidebar-toggle" />
             <div className="flex items-center space-x-3">
+              {user && (
+                <>
+                  <Badge variant="secondary" className="text-sm" data-testid="text-user-balance">
+                    ${parseFloat(user.balance).toFixed(2)}
+                  </Badge>
+                  <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
+                </>
+              )}
               <ThemeToggle />
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => logoutMutation.mutate()}
+                data-testid="button-logout"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
               <WalletConnectButton />
             </div>
           </header>

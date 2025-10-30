@@ -5,9 +5,39 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletConnectButton } from "@/components/wallet-connect-button";
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 export default function Landing() {
+  const { user, isAuthenticated } = useAuth();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest("POST", "/api/logout", {});
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Logout failed",
+        description: "Unable to log out. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   return (
     <div className="min-h-screen">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
@@ -43,6 +73,35 @@ export default function Landing() {
 
           <div className="flex items-center space-x-3">
             <ThemeToggle />
+            {isAuthenticated && user ? (
+              <>
+                <Badge variant="secondary" className="text-sm" data-testid="text-user-balance">
+                  ${parseFloat(user.balance).toFixed(2)}
+                </Badge>
+                <span className="text-sm font-medium" data-testid="text-username">{user.username}</span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => logoutMutation.mutate()}
+                  data-testid="button-logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" size="sm" data-testid="button-login-link">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button size="sm" data-testid="button-register-link">
+                    Register
+                  </Button>
+                </Link>
+              </>
+            )}
             <WalletConnectButton />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { ArrowRight, TrendingUp, Globe, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import heroImage from "@assets/generated_images/African_financial_cityscape_hero_8d06ceda.png";
+import heroImage from "@assets/stock_images/african_business_sky_38fd7045.jpg";
 
 export function HeroSection() {
   return (
