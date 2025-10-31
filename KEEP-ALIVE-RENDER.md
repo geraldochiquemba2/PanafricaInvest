@@ -48,9 +48,13 @@ git push origin main
 5. Configure:
    - **Build Command**: `npm install && npm run build`
    - **Start Command**: `npm run start`
-   - **Environment**: Production
-6. **NÃO** adicione DATABASE_URL (vai usar memória automaticamente)
+6. **Adicione Variáveis de Ambiente**:
+   - `NODE_ENV` = `production`
+   - `RENDER_APP_URL` = URL do seu app (ex: `https://panafricainvest.onrender.com`)
+   - `SESSION_SECRET` = qualquer texto aleatório
 7. Clique em **"Create Web Service"**
+
+**IMPORTANTE**: A variável `RENDER_APP_URL` deve ser a URL EXTERNA do seu serviço no Render!
 
 ### 3. Verificar nos Logs
 
