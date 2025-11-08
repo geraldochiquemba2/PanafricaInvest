@@ -11,6 +11,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
+  // Health check endpoint for Render.com (with z)
+  app.get("/healthz", (_req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Auth: Register
   app.post("/api/register", async (req, res) => {
     try {
