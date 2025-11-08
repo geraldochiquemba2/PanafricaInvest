@@ -11,9 +11,13 @@ declare module 'express-session' {
   }
 }
 
+if (!process.env.SESSION_SECRET) {
+  throw new Error("SESSION_SECRET environment variable is required");
+}
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "panafrica-invest-secret-key-2025",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
