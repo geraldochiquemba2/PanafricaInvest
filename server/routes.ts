@@ -7,7 +7,7 @@ import { insertUserSchema } from "@shared/schema";
 
 // News cache to reduce API calls
 let newsCache: { articles: any[], timestamp: number } | null = null;
-const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+const CACHE_DURATION = 10 * 60 * 60 * 1000; // 10 hours
 
 // Fallback news data for when API fails
 const fallbackNews = [
