@@ -5,6 +5,59 @@ import { storage } from "./storage";
 import { generateRecommendations, generateReinvestmentSuggestion, generateMarketAnalysis, generateChatResponse } from "./groq-service";
 import { insertUserSchema } from "@shared/schema";
 
+// News cache to reduce API calls
+let newsCache: { articles: any[], timestamp: number } | null = null;
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+
+// Fallback news data for when API fails
+const fallbackNews = [
+  {
+    title: "African Stock Markets Show Strong Growth in 2024",
+    url: "https://www.worldbank.org/en/region/afr",
+    source: "World Bank Africa",
+    publishedAt: new Date().toISOString(),
+    language: "en",
+    country: "Multiple",
+    imageUrl: null,
+  },
+  {
+    title: "Nigerian Stock Exchange Reaches New Milestone",
+    url: "https://www.ngxgroup.com/",
+    source: "NGX Group",
+    publishedAt: new Date().toISOString(),
+    language: "en",
+    country: "Nigeria",
+    imageUrl: null,
+  },
+  {
+    title: "South African Economy Shows Resilience",
+    url: "https://www.jse.co.za/",
+    source: "JSE",
+    publishedAt: new Date().toISOString(),
+    language: "en",
+    country: "South Africa",
+    imageUrl: null,
+  },
+  {
+    title: "Kenya Leads in Mobile Banking Innovation",
+    url: "https://www.nse.co.ke/",
+    source: "Nairobi Securities Exchange",
+    publishedAt: new Date().toISOString(),
+    language: "en",
+    country: "Kenya",
+    imageUrl: null,
+  },
+  {
+    title: "Egyptian Market Attracts Foreign Investment",
+    url: "https://www.egx.com.eg/",
+    source: "Egyptian Exchange",
+    publishedAt: new Date().toISOString(),
+    language: "en",
+    country: "Egypt",
+    imageUrl: null,
+  },
+];
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Health check endpoint (lightweight for keep-alive)
   app.get("/health", (_req, res) => {
@@ -190,9 +243,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Fetch African financial news from GDELT API
+  // Fetch African financial news from GDELT API (with cache)
   app.get("/api/news", async (_req, res) => {
     try {
+      // Check cache first
+      const now = Date.now();
+      if (newsCache && (now - newsCache.timestamp) < CACHE_DURATION) {
+        console.log("Serving news from cache");
+        return res.json({ articles: newsCache.articles, cached: true });
+      }
+
+      // Try to fetch from GDELT API
       const query = encodeURIComponent('(africa OR african) AND (finance OR economy OR market OR investment OR stock OR GDP OR banking OR currency)');
       const mode = 'artlist';
       const maxRecords = 30;
@@ -200,10 +261,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const gdeltUrl = `https://api.gdeltproject.org/api/v2/doc/doc?query=${query}&mode=${mode}&maxrecords=${maxRecords}&timespan=${timespan}&format=json&sort=datedesc`;
       
-      const response = await fetch(gdeltUrl);
+      const response = await fetch(gdeltUrl, {
+        headers: {
+          'User-Agent': 'PanafricaInvest/1.0',
+        },
+      });
       
       if (!response.ok) {
-        throw new Error(`GDELT API returned ${response.status}`);
+        console.warn(`GDELT API returned ${response.status}, using fallback news`);
+        
+        // Update cache with fallback news
+        newsCache = {
+          articles: fallbackNews,
+          timestamp: now,
+        };
+        
+        return res.json({ articles: fallbackNews, fallback: true });
       }
       
       const data = await response.json();
@@ -216,12 +289,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
         language: article.language || 'en',
         country: article.sourcecountry || 'Unknown',
         imageUrl: article.socialimage || null,
-      })) || [];
+      })) || fallbackNews;
       
+      // Update cache
+      newsCache = {
+        articles,
+        timestamp: now,
+      };
+      
+      console.log(`Fetched ${articles.length} news articles from GDELT`);
       res.json({ articles });
     } catch (error) {
       console.error("Error fetching news:", error);
-      res.status(500).json({ error: "Failed to fetch news", articles: [] });
+      
+      // Return cached data if available, otherwise fallback
+      if (newsCache) {
+        console.log("Serving stale cache due to error");
+        return res.json({ articles: newsCache.articles, cached: true, stale: true });
+      }
+      
+      res.json({ articles: fallbackNews, fallback: true });
     }
   });
 
