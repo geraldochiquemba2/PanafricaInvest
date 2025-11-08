@@ -8,6 +8,7 @@ import { ArrowLeft, ExternalLink, Newspaper, Clock, Globe, LayoutDashboard } fro
 import { useLocation, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistance } from "date-fns";
+import { useState } from "react";
 import newsBackgroundImage from "@assets/stock_images/african_business_fin_fb5b7fcc.jpg";
 import africaMapImage from "@assets/africa_map.png";
 
@@ -23,6 +24,7 @@ interface NewsArticle {
 
 export default function News() {
   const [, setLocation] = useLocation();
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   
   const style = {
     "--sidebar-width": "16rem",
@@ -33,6 +35,10 @@ export default function News() {
     queryKey: ["/api/news"],
     refetchInterval: 5 * 60 * 1000,
   });
+
+  const handleImageError = (index: number) => {
+    setFailedImages(prev => new Set(prev).add(index));
+  };
 
   const formatPublishedDate = (dateString: string) => {
     try {
@@ -154,13 +160,14 @@ export default function News() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {article.imageUrl && (
-                    <div className="mb-3 rounded-lg overflow-hidden">
+                  {article.imageUrl && !failedImages.has(index) && (
+                    <div className="mb-3 rounded-lg overflow-hidden bg-muted">
                       <img 
                         src={article.imageUrl} 
                         alt={article.title}
                         className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
+                        onError={() => handleImageError(index)}
                       />
                     </div>
                   )}
